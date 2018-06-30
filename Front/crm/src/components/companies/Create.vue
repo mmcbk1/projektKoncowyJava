@@ -50,7 +50,7 @@
                         type="text"
                         id="city"
                         placeholder="np. Gdynia"
-                        v-model="companyData.city"
+                        v-model="companyData.address.city"
                 >
             </div>
             <div>
@@ -58,7 +58,7 @@
                 <input type="text"
                        id="country"
                        placeholder="np. Polska"
-                       v-model="companyData.country"
+                       v-model="companyData.address.country"
                 >
             </div>
             <div>
@@ -67,7 +67,7 @@
                         type="text"
                         id="zip-code"
                         placeholder="xx-xxx"
-                        v-model="companyData.zipCode"
+                        v-model="companyData.address.zipCode"
                 >
             </div>
             <div>
@@ -76,7 +76,7 @@
                         type="text"
                         id="state"
                         placeholder="np. Pomorskie"
-                        v-model="companyData.state"
+                        v-model="companyData.address.state"
                 >
             </div>
             <div>
@@ -85,7 +85,7 @@
                         type="text"
                         id="street"
                         placeholder="np. akacjowa"
-                        v-model="companyData.street"
+                        v-model="companyData.address.street"
                 >
             </div>
             <div>
@@ -94,7 +94,7 @@
                         type="text"
                         id="street-number"
                         placeholder="np. 20/80"
-                        v-model="companyData.streetNumber"
+                        v-model="companyData.address.streetNumber"
                 >
             </div>
         </section>
@@ -119,12 +119,14 @@
                   nip:'',
                   fax:'',
                   phone: '',
-                  city:'',
-                  country:'',
-                  zipCode:'',
-                  state:'',
-                  streetNumber:'',
-                  street:'',
+                  address:{
+                      city:'',
+                      country:'',
+                      zipCode:'',
+                      state:'',
+                      streetNumber:'',
+                      street:'',
+                  }
               }
             },
             storeCompany(){
