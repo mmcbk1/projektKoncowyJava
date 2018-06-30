@@ -29,7 +29,7 @@
                         type="text"
                         id="phone"
                         placeholder="+48 xxx-xxx-xxx"
-                        v-model="companyData.phone"
+                        v-model="companyData.phone_no"
                 >
             </div>
             <div>
@@ -67,7 +67,7 @@
                         type="text"
                         id="zip-code"
                         placeholder="xx-xxx"
-                        v-model="companyData.address.zipCode"
+                        v-model="companyData.address.postal_code"
                 >
             </div>
             <div>
@@ -94,7 +94,7 @@
                         type="text"
                         id="street-number"
                         placeholder="np. 20/80"
-                        v-model="companyData.address.streetNumber"
+                        v-model="companyData.address.street_number"
                 >
             </div>
         </section>
@@ -118,13 +118,13 @@
                   name:'',
                   nip:'',
                   fax:'',
-                  phone: '',
+                  phone_no: '',
                   address:{
                       city:'',
                       country:'',
-                      zipCode:'',
+                      postal_code:'',
                       state:'',
-                      streetNumber:'',
+                      street_number:'',
                       street:'',
                   }
               }

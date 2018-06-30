@@ -12,23 +12,20 @@ import java.util.List;
 @Table(name = "companies")
 public class Company extends BaseEntity{
 
-    @NotNull
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @NotNull
-    @Column(name = "nip", nullable = false,unique = true)
+    @Column(name = "nip",unique = true)
     private String nip;
 
-    @NotNull
-    @Column(name = "phone_no", nullable = false)
+
+    @Column(name = "phone_no")
     private String phone;
 
-    @NotNull
-    @Column(name = "fax", nullable = false)
+
+    @Column(name = "fax")
     private String fax;
 
-    @NotNull
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id",
             referencedColumnName = "id",
