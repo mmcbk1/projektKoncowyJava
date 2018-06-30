@@ -13,25 +13,29 @@ import javax.validation.constraints.NotNull;
 @Table(name = "addresses")
 public class Address extends BaseEntity{
 
-    @NotNull
-    @Column(name = "street", nullable = false)
+
+    @Column(name = "street")
     private String street;
 
-    @NotNull
-    @Column(name = "city", nullable = false)
+
+    @Column(name = "city")
     private String city;
 
-    @NotNull
-    @Column(name = "state", nullable = false)
+
+    @Column(name = "state")
     private String state;
 
-    @NotNull
-    @Column(name = "country", nullable = false)
+
+    @Column(name = "country")
     private String country;
 
-    @NotNull
-    @Column(name = "postal_code", nullable = false)
+
+    @Column(name = "postal_code")
     private String postalCode;
+
+
+    @Column(name = "street_number")
+    private String streetNumber;
 
 
 
