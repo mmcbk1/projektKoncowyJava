@@ -1,15 +1,11 @@
 <template>
   <div>
-      <router-link tag="li" :to="{name:'users'}">
-          <a>Users</a>
+      <router-link :to="{name:'company-create'}" tag="li">
+          <a>Dodaj firmę</a>
       </router-link>
-      <router-link tag="li" :to="{name:'users'}">
-          <a>Departments</a>
-      </router-link>
-      <router-view></router-view>
-     <ul>
-       <li v-for="company in companies">{{company.name}}</li>
-     </ul>
+      <ul>
+          <li v-for="company in companies">{{company.name}}</li>
+      </ul>
   </div>
 </template>
 
@@ -23,14 +19,19 @@
         },
         methods: {
             fetchCompanies() {
-                axios.get('companies')
+                let vm = this;
+               return axios.get('companies')
                     .then(function (response) {
-                            console.log(respose);
+                        console.log(response);
+                            vm.companies = response.data;
                         },
                         function (error) {
 
                         })
             }
+        },
+        created(){
+            this.fetchCompanies();
         }
     }
 

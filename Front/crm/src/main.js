@@ -5,7 +5,7 @@ import {routes} from './routes'
 import Axios from 'axios';
 
 window.axios = Axios;
-axios.defaults.baseURL = 'https://localhost:8080/';
+axios.defaults.baseURL = 'http://localhost:8080/';
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 let router = new VueRouter({
