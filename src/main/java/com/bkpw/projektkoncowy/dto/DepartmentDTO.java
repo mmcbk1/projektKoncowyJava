@@ -26,7 +26,7 @@ public class DepartmentDTO extends BaseEntityDTO {
     private List<User> users;
 */
 
-    private Long company;
+    private Long company_id;
 
-    private Address addresses;
+    private Address address;
 }

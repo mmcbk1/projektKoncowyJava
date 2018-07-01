@@ -6,6 +6,7 @@ import com.bkpw.projektkoncowy.service.CompanyService;
 import com.bkpw.projektkoncowy.service.DepartmentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -62,8 +63,7 @@ public class DepartmentController {
 
     private Department convertToEntity(DepartmentDTO departmentDTO) throws ParseException {
         Department department = modelMapper.map(departmentDTO, Department.class);
-        department.setCompany(companyService.getOne(departmentDTO.getCompany()));
-
+        department.setCompany(companyService.getOne(departmentDTO.getCompany_id()));
         return department;
     }
 

@@ -12,8 +12,8 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "departments")
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Department extends BaseEntity {
 
     @NotNull
@@ -37,5 +37,5 @@ public class Department extends BaseEntity {
     @JoinColumn(name = "address_id",
             referencedColumnName = "id",
             nullable = false)
-    private Address addresses;
+    private Address address;
 }

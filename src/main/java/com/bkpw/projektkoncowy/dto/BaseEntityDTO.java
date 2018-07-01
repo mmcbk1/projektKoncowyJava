@@ -17,9 +17,6 @@ import java.util.Date;
 @NoArgsConstructor
 public  abstract class BaseEntityDTO {
 
-
-    private Long id;
-
     private Date created_at;
 
     private Date updated_at;

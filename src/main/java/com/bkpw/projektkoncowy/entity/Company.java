@@ -35,7 +35,7 @@ public class Company extends BaseEntity{
             nullable = false)
     private Address address;
 
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company", fetch = FetchType.EAGER)
     private List<Department> departments;
 
 
