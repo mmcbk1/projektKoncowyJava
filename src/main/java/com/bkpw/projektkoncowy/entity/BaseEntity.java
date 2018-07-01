@@ -1,8 +1,10 @@
 package com.bkpw.projektkoncowy.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,6 +14,8 @@ import java.util.Date;
 @Data
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
+        allowGetters = true)
 public  abstract class BaseEntity {
 
 
@@ -19,9 +23,11 @@ public  abstract class BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Temporal(TemporalType.DATE)
+    @CreatedDate
+    @Temporal(TemporalType.TIMESTAMP)
     private Date created_at;
 
-    @Temporal(TemporalType.DATE)
+    @LastModifiedDate
+    @Temporal(TemporalType.TIMESTAMP)
     private Date updated_at;
 }
