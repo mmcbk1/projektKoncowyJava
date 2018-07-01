@@ -37,5 +37,5 @@ public class Department extends BaseEntity {
     @JoinColumn(name = "address_id",
             referencedColumnName = "id",
             nullable = false)
-    private Address addresses;
+    private Address address;
 }

@@ -47,7 +47,7 @@ public class DepartmentService {
         }
         Department departmentToUpdate=OptionalDepartmentToUpdate.get();
 
-        departmentToUpdate.setAddresses(department.getAddresses());
+        departmentToUpdate.setAddress(department.getAddress());
         departmentToUpdate.setName(department.getName());
         departmentToUpdate.setShortName(department.getShortName());
 

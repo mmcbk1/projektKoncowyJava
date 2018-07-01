@@ -4,8 +4,11 @@
           <a>Dodaj firmę</a>
       </router-link>
       <ul>
-          <li v-for="company in companies">
-              <router-link tag="a" :to="{name:'company-single', params:{cid:company.id}}">{{company.name}}</router-link>
+          <li v-for="company in companies" :key="company.id">
+              <router-link tag="a"
+                           :to="{
+                           name:'company-single', params:{cid:company.id}
+                           }">{{company.name}}</router-link>
           </li>
       </ul>
   </div>
@@ -33,6 +36,7 @@
             }
         },
         created(){
+            console.log('created');
             this.fetchCompanies();
         }
     }
