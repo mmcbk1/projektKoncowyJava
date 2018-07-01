@@ -1,11 +1,17 @@
 package com.bkpw.projektkoncowy.entity;
 
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import lombok.Data;
 
+import javax.persistence.*;
 import java.util.Date;
 
+
+
+@Data
 @MappedSuperclass
+@Inheritance(strategy = InheritanceType.JOINED)
 public  abstract class BaseEntity {
 
 

@@ -1,5 +1,6 @@
 package com.bkpw.projektkoncowy.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "departments")
+@AllArgsConstructor
 public class Department extends BaseEntity {
 
     @NotNull
