@@ -56,8 +56,8 @@ public class DepartmentController {
 
     @PutMapping("department/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable Long id, @RequestBody Department department) {
-        departmentService.update(department, id);
+    public Department update(@PathVariable Long id, @RequestBody Department department) {
+        return departmentService.update(department, id);
     }
 
 

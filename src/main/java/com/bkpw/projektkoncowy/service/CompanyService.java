@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CompanyService implements GenericService<Company>{
+public class CompanyService implements GenericService<Company> {
 
     @Autowired
     CompanyRepository companyRepository;
@@ -44,16 +44,8 @@ public class CompanyService implements GenericService<Company>{
         if (!OptionalCompanyToUpdate.isPresent()) {
             throw new NotFoundException(String.format("Company with id %s not found", id));
         }
-        Company companyToUpdate = OptionalCompanyToUpdate.get();
-
-        companyToUpdate.setName(company.getName());
-        companyToUpdate.setFax(company.getFax());
-        companyToUpdate.setNip(company.getNip());
-        companyToUpdate.setPhone(company.getPhone());
-        companyToUpdate.setAddress(company.getAddress());
-        companyToUpdate.setDepartments(company.getDepartments());
-
-        return companyRepository.save(companyToUpdate);
+        company.setId(id);
+        return companyRepository.save(company);
     }
 
 

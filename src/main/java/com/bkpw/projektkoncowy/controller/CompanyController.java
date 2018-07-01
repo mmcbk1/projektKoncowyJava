@@ -44,8 +44,8 @@ public class CompanyController {
 
     @PutMapping("company/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable Long id, @RequestBody Company company){
-        companyService.update(company,id);
+    public Company update(@PathVariable Long id, @RequestBody Company company){
+        return companyService.update(company,id);
     }
 
 

@@ -46,23 +46,9 @@ public class UserService implements GenericService<User> {
         if (!OptionalUserToUpdate.isPresent()) {
             throw new NotFoundException(String.format("User with id %s not found", id));
         }
-        User userToUpdate = OptionalUserToUpdate.get();
-
-        updateAllData(user, userToUpdate);
-
-        return userRepository.save(userToUpdate);
+        user.setId(id);
+        return userRepository.save(user);
     }
 
-    private void updateAllData(User user, User userToUpdate) {
-        userToUpdate.setName(user.getName());
-        userToUpdate.setLastName(user.getLastName());
-        userToUpdate.setEmail(user.getEmail());
-        userToUpdate.setAddress(user.getAddress());
-        userToUpdate.setBirthDate(user.getBirthDate());
-        userToUpdate.setGender(user.getGender());
-        userToUpdate.setHireDate(user.getHireDate());
-        userToUpdate.setPosition(user.getPosition());
-        userToUpdate.setSalary(user.getSalary());
-        userToUpdate.setPassword(user.getPassword());
-    }
+
 }
