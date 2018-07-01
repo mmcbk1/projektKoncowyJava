@@ -42,62 +42,9 @@
                 >
             </div>
         </section>
-        <section>
-            <h3>Dane adresowe</h3>
-            <div>
-                <label for="city">Miasto:</label>
-                <input
-                        type="text"
-                        id="city"
-                        placeholder="np. Gdynia"
-                        v-model="companyData.address.city"
-                >
-            </div>
-            <div>
-                <label for="country">Państwo:</label>
-                <input type="text"
-                       id="country"
-                       placeholder="np. Polska"
-                       v-model="companyData.address.country"
-                >
-            </div>
-            <div>
-                <label for="zip-code">Kod pocztowy:</label>
-                <input
-                        type="text"
-                        id="zip-code"
-                        placeholder="xx-xxx"
-                        v-model="companyData.address.postal_code"
-                >
-            </div>
-            <div>
-                <label for="state">Województwo:</label>
-                <input
-                        type="text"
-                        id="state"
-                        placeholder="np. Pomorskie"
-                        v-model="companyData.address.state"
-                >
-            </div>
-            <div>
-                <label for="street">Ulica:</label>
-                <input
-                        type="text"
-                        id="street"
-                        placeholder="np. akacjowa"
-                        v-model="companyData.address.street"
-                >
-            </div>
-            <div>
-                <label for="street-number">Nr domu/lokalu:</label>
-                <input
-                        type="text"
-                        id="street-number"
-                        placeholder="np. 20/80"
-                        v-model="companyData.address.street_number"
-                >
-            </div>
-        </section>
+       <crm-address
+       @updateAddress="updateAddress($event)">
+       </crm-address>
             <div>
                 <button type="submit" @click="storeCompany()">Zapisz</button>
             </div>
@@ -106,11 +53,15 @@
 </template>
 
 <script>
+    import Address from '../address/Address';
     export default {
         data(){
             return {
                 companyData:this.initState(),
             }
+        },
+        components:{
+            'crm-address' : Address
         },
         methods:{
             initState(){
@@ -119,14 +70,7 @@
                   nip:'',
                   fax:'',
                   phone_no: '',
-                  address:{
-                      city:'',
-                      country:'',
-                      postal_code:'',
-                      state:'',
-                      street_number:'',
-                      street:'',
-                  }
+                  address:{}
               }
             },
             storeCompany(){
@@ -134,10 +78,13 @@
                return axios.post('company', this.companyData)
                     .then(function(response){
                         vm.initState();
-                        vm.$router.push({name:'company'});
+                        vm.$router.push({name:'companies'});
                     },function(error){
 
                     });
+            },
+            updateAddress(address){
+                this.address = address;
             }
         }
     }
