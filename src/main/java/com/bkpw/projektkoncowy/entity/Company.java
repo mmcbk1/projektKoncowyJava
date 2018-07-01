@@ -1,6 +1,7 @@
 package com.bkpw.projektkoncowy.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,7 +36,8 @@ public class Company extends BaseEntity{
             nullable = false)
     private Address address;
 
-    @OneToMany(mappedBy = "company", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Department> departments;
 
 
