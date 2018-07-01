@@ -29,7 +29,7 @@
               department:{
                   name:'',
                   shortname:'',
-                  company_id: null,
+                  company_id: this.$route.params.cid,
                   address:{}
               }
           }

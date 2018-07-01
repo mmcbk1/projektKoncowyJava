@@ -2,6 +2,7 @@ package com.bkpw.projektkoncowy.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,6 +12,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "departments")
+@NoArgsConstructor
 @AllArgsConstructor
 public class Department extends BaseEntity {
 

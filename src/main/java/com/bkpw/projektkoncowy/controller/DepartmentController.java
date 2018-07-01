@@ -3,10 +3,12 @@ package com.bkpw.projektkoncowy.controller;
 import com.bkpw.projektkoncowy.entity.Department;
 import com.bkpw.projektkoncowy.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8081")
@@ -17,7 +19,12 @@ public class DepartmentController {
 
     @PostMapping("/department")
     @ResponseStatus(HttpStatus.CREATED)
-    public Department create(@RequestBody Department department) {
+    public Department create(@RequestBody String params) {
+
+        GsonJsonParser gsonJsonParser = new GsonJsonParser();
+        Map departmentMap = gsonJsonParser.parseMap(params);
+        Department department = new Department();
+        System.out.println(departmentMap);
         return departmentService.create(department);
     }
 

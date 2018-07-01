@@ -2,7 +2,10 @@
     <div>
         <article>
             <section>
-                <router-link tag="div" :to="{name:'department-create'}">
+                <router-link tag="div" :to="{
+                name:'department-create',
+                params:{cid:$route.params.cid}
+                }">
                     <a>Dodaj dział</a>
                 </router-link>
             </section>
