@@ -6,25 +6,25 @@ import com.bkpw.projektkoncowy.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CompanyService {
+public class CompanyService implements GenericService<Company>{
 
     @Autowired
     CompanyRepository companyRepository;
-    public Company create(Company company){
+
+    public Company create(Company company) {
         return companyRepository.save(company);
     }
 
-    public List<Company> getAll(){
+    public List<Company> getAll() {
         return companyRepository.findAll();
     }
 
-    public Company getOne(Long id){
-        Optional<Company> company =companyRepository.findById(id);
+    public Company getOne(Long id) {
+        Optional<Company> company = companyRepository.findById(id);
         if (!company.isPresent()) {
             throw new NotFoundException(String.format("Company with id %s not found", id));
         }
@@ -32,19 +32,19 @@ public class CompanyService {
         return company.get();
     }
 
-    public void delete(Long id){
+    public void delete(Long id) {
         if (!companyRepository.existsById(id)) {
             throw new NotFoundException(String.format("Company with id %s not found", id));
         }
         companyRepository.deleteById(id);
     }
 
-    public Company update(Company company,Long id){
-        Optional<Company> OptionalCompanyToUpdate =companyRepository.findById(id);
+    public Company update(Company company, Long id) {
+        Optional<Company> OptionalCompanyToUpdate = companyRepository.findById(id);
         if (!OptionalCompanyToUpdate.isPresent()) {
             throw new NotFoundException(String.format("Company with id %s not found", id));
         }
-        Company companyToUpdate=OptionalCompanyToUpdate.get();
+        Company companyToUpdate = OptionalCompanyToUpdate.get();
 
         companyToUpdate.setName(company.getName());
         companyToUpdate.setFax(company.getFax());
@@ -55,12 +55,6 @@ public class CompanyService {
 
         return companyRepository.save(companyToUpdate);
     }
-
-
-
-
-
-
 
 
 }

@@ -19,7 +19,7 @@ public class Company extends BaseEntity{
     @Column(name = "name")
     private String name;
 
-    @Column(name = "nip")
+    @Column(name = "nip",unique = true)
     private String nip;
 
 

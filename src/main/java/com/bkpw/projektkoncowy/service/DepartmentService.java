@@ -1,5 +1,6 @@
 package com.bkpw.projektkoncowy.service;
 
+import com.bkpw.projektkoncowy.entity.Company;
 import com.bkpw.projektkoncowy.entity.Department;
 import com.bkpw.projektkoncowy.exception.NotFoundException;
 import com.bkpw.projektkoncowy.repository.CompanyRepository;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class DepartmentService {
+public class DepartmentService implements GenericService<Department>{
 
     @Autowired
     DepartmentRepository departmentRepository;

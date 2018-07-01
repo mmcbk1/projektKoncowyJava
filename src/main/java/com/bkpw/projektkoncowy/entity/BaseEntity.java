@@ -5,17 +5,19 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
 
+import static javax.persistence.TemporalType.TIMESTAMP;
 
 
 @Data
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.JOINED)
-@JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
-        allowGetters = true)
+@JsonIgnoreProperties(value = {"createdAt", "updatedAt"},allowGetters = true)
+@EntityListeners(AuditingEntityListener.class)
 public  abstract class BaseEntity {
 
 
@@ -24,10 +26,10 @@ public  abstract class BaseEntity {
     private Long id;
 
     @CreatedDate
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TIMESTAMP)
     private Date created_at;
 
     @LastModifiedDate
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TIMESTAMP)
     private Date updated_at;
 }
