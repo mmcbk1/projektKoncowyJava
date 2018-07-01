@@ -4,7 +4,9 @@
           <a>Dodaj firmę</a>
       </router-link>
       <ul>
-          <li v-for="company in companies">{{company.name}}</li>
+          <li v-for="company in companies">
+              <router-link tag="a" :to="{name:'company-single', params:{cid:1}}">{{company.name}}</router-link>
+          </li>
       </ul>
   </div>
 </template>
