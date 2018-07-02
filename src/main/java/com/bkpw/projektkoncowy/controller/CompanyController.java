@@ -16,7 +16,6 @@ public class CompanyController {
     @Autowired
     CompanyService companyService;
 
-
     @PostMapping("/company")
     @ResponseStatus(HttpStatus.CREATED)
     public Company create(@RequestBody Company company) {
@@ -35,7 +34,6 @@ public class CompanyController {
         return companyService.getOne(id);
     }
 
-
     @DeleteMapping("company/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id){
@@ -44,7 +42,8 @@ public class CompanyController {
 
     @PutMapping("company/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Company update(@PathVariable Long id, @RequestBody Company company){
+    public Company update(@PathVariable Long id,
+                          @RequestBody Company company){
         return companyService.update(company,id);
     }
 

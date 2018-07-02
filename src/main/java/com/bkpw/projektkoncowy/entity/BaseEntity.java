@@ -27,6 +27,7 @@ public  abstract class BaseEntity {
 
     @CreatedDate
     @Temporal(TIMESTAMP)
+    @Column(updatable = false)
     private Date created_at;
 
     @LastModifiedDate

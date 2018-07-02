@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 
 @Data
@@ -21,10 +22,7 @@ public class DepartmentDTO extends BaseEntityDTO {
 
     private String shortName;
 
-  /*  @OneToMany(
-            mappedBy = "department")
-    private List<User> users;
-*/
+    private List<Long> users;
 
     private Long company_id;
 

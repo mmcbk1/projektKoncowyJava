@@ -6,11 +6,12 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@SpringBootApplication
 
-@EnableTransactionManagement
-@EnableJpaRepositories
+
+//@EnableTransactionManagement
+//@EnableJpaRepositories
 @EnableJpaAuditing
+@SpringBootApplication
 public class ProjektkoncowyApplication {
 
 	public static void main(String[] args) {

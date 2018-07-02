@@ -61,7 +61,7 @@ public class DepartmentController {
     }
 
 
-    private Department convertToEntity(DepartmentDTO departmentDTO) throws ParseException {
+    private Department convertToEntity(DepartmentDTO departmentDTO)  {
         Department department = modelMapper.map(departmentDTO, Department.class);
         department.setCompany(companyService.getOne(departmentDTO.getCompany_id()));
         return department;
