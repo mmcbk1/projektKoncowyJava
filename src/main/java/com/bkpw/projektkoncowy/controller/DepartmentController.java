@@ -7,6 +7,8 @@ import com.bkpw.projektkoncowy.service.DepartmentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.GsonJsonParser;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +16,6 @@ import java.text.ParseException;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8081")
 public class DepartmentController {
 
     @Autowired
@@ -37,8 +38,8 @@ public class DepartmentController {
 
     @GetMapping("/departments")
     @ResponseStatus(HttpStatus.OK)
-    public List<Department> getAll() {
-        return departmentService.getAll();
+    public Page<Department> getAll(Pageable pageable) {
+        return departmentService.getAll(pageable);
     }
 
     @GetMapping("department/{id}")

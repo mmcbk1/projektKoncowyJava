@@ -4,6 +4,8 @@ import com.bkpw.projektkoncowy.entity.Company;
 import com.bkpw.projektkoncowy.exception.NotFoundException;
 import com.bkpw.projektkoncowy.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,8 +21,8 @@ public class CompanyService implements GenericService<Company> {
         return companyRepository.save(company);
     }
 
-    public List<Company> getAll() {
-        return companyRepository.findAll();
+    public Page<Company> getAll(Pageable pageable) {
+        return companyRepository.findAll(pageable);
     }
 
     public Company getOne(Long id) {

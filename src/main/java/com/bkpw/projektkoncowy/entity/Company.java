@@ -4,9 +4,11 @@ package com.bkpw.projektkoncowy.entity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Data
@@ -14,7 +16,9 @@ import java.util.List;
 @Table(name = "companies")
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class Company extends BaseEntity{
+
 
     @Column(name = "name")
     private String name;

@@ -6,6 +6,8 @@ import com.bkpw.projektkoncowy.exception.NotFoundException;
 import com.bkpw.projektkoncowy.repository.CompanyRepository;
 import com.bkpw.projektkoncowy.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +23,8 @@ public class DepartmentService implements GenericService<Department> {
         return departmentRepository.save(department);
     }
 
-    public List<Department> getAll() {
-        return departmentRepository.findAll();
+    public Page<Department> getAll(Pageable pageable) {
+        return departmentRepository.findAll(pageable);
     }
 
     public Department getOne(Long id) {

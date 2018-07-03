@@ -30,7 +30,7 @@ public class User extends BaseEntity {
 
 
     @Column(name = "email")
-    //@Email(message = "Email should be valid")
+    @Email(message = "Email should be valid")
     private String email;
 
 

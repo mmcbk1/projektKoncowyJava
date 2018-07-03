@@ -4,6 +4,8 @@ import com.bkpw.projektkoncowy.entity.User;
 import com.bkpw.projektkoncowy.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +13,6 @@ import javax.jws.soap.SOAPBinding;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8081")
 public class UserController {
 
     @Autowired
@@ -25,8 +26,8 @@ public class UserController {
 
     @GetMapping("/users")
     @ResponseStatus(HttpStatus.OK)
-    public List<User> getAll(){
-        return userService.getAll();
+    public Page<User> getAll(Pageable pageable){
+        return userService.getAll(pageable);
     }
 
     @GetMapping("/user/{id}")
