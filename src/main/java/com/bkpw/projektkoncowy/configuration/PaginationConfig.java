@@ -14,9 +14,9 @@ public class PaginationConfig extends RepositoryRestConfigurerAdapter {
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
 
-        config.setPageParamName("p")
-                .setLimitParamName("l")
-                .setSortParamName("s");
+        config.setPageParamName("page")
+                .setLimitParamName("length")
+                .setSortParamName("sort");
 
 
     }
