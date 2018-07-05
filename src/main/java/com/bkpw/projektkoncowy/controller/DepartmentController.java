@@ -10,8 +10,10 @@ import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.text.ParseException;
 import java.util.List;
 
@@ -57,8 +59,10 @@ public class DepartmentController {
 
     @PutMapping("department/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Department update(@PathVariable Long id, @RequestBody Department department) {
-        return departmentService.update(department, id);
+    public Department update(@PathVariable Long id,
+                             @RequestBody @Valid Department department,
+                             BindingResult bindingResult) {
+        return departmentService.update(department, id,bindingResult);
     }
 
 

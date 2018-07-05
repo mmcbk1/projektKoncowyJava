@@ -31,8 +31,6 @@ public class UserDTO extends BaseEntityDTO{
 
     private Date hireDate;
 
-    private String password;
-
     private Address address;
 
     private Set<Role> userRoles;

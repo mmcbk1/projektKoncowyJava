@@ -1,5 +1,8 @@
 package com.bkpw.projektkoncowy.controller;
 
+import com.bkpw.projektkoncowy.dto.DepartmentDTO;
+import com.bkpw.projektkoncowy.dto.UserDTO;
+import com.bkpw.projektkoncowy.entity.Department;
 import com.bkpw.projektkoncowy.entity.User;
 import com.bkpw.projektkoncowy.service.UserService;
 import org.modelmapper.ModelMapper;
@@ -7,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.jws.soap.SOAPBinding;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,10 +23,15 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    ModelMapper modelMapper;
+
     @PostMapping("/user")
     @ResponseStatus(HttpStatus.CREATED)
-    public User create(@RequestBody User user){
-        return userService.create(user);
+    public User create(@RequestBody @Valid UserDTO userDTO,
+                       BindingResult bindingResult){
+        User user=convertToEntity(userDTO);
+        return userService.create(user,bindingResult);
     }
 
     @GetMapping("/users")
@@ -45,7 +55,20 @@ public class UserController {
     @PutMapping("/user/{id}")
     @ResponseStatus(HttpStatus.OK)
     public User update(@PathVariable Long id,
-                       @RequestBody User user){
-        return userService.update(user,id);
+                       @RequestBody @Valid UserDTO userDTO,
+                       BindingResult bindingResult){
+        User user=convertToEntity(userDTO);
+        return userService.update(user,id,bindingResult);
+    }
+
+    private User convertToEntity(UserDTO userDTO)  {
+        User user = modelMapper.map(userDTO, User.class);
+        user.toString();
+        return user;
+    }
+
+    private UserDTO  entityToDTO(User user){
+        UserDTO userDTO=modelMapper.map(user,UserDTO.class);
+        return userDTO;
     }
 }
