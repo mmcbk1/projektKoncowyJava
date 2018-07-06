@@ -23,9 +23,12 @@ public class DepartmentService implements GenericService<Department> {
     @Autowired
     DepartmentRepository departmentRepository;
 
-    public Department create(Department department) {
+    public Department create(Department department, BindingResult bindingResult) {
+        validate(department,null,bindingResult);
         return departmentRepository.save(department);
     }
+
+
 
     public Page<Department> getAll(Pageable pageable) {
         return departmentRepository.findAll(pageable);
@@ -61,7 +64,7 @@ public class DepartmentService implements GenericService<Department> {
         if (!department.getName().equals(currentDepName)
                 && departmentRepository.existsByName(department.getName())) {
             bindingResult.addError(
-                    new FieldError("department", "field",
+                    new FieldError("department", "name",
                             String.format("Department with this name %s already exists", department.getName())));
         }
         if (bindingResult.hasErrors()) {

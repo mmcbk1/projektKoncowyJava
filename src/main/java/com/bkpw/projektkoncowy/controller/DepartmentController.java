@@ -6,7 +6,6 @@ import com.bkpw.projektkoncowy.service.CompanyService;
 import com.bkpw.projektkoncowy.service.DepartmentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -14,8 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.text.ParseException;
-import java.util.List;
 
 @RestController
 public class DepartmentController {
@@ -26,16 +23,15 @@ public class DepartmentController {
     @Autowired
     CompanyService companyService;
 
-
     @Autowired
     private ModelMapper modelMapper;
 
     @PostMapping("/department")
     @ResponseStatus(HttpStatus.CREATED)
-    public Department create(@RequestBody DepartmentDTO departmentDTO) throws ParseException {
-
+    public Department create(@RequestBody @Valid DepartmentDTO departmentDTO,
+                             BindingResult bindingResult) {
         Department department = convertToEntity(departmentDTO);
-        return departmentService.create(department);
+        return departmentService.create(department, bindingResult);
     }
 
     @GetMapping("/departments")
@@ -62,11 +58,11 @@ public class DepartmentController {
     public Department update(@PathVariable Long id,
                              @RequestBody @Valid Department department,
                              BindingResult bindingResult) {
-        return departmentService.update(department, id,bindingResult);
+        return departmentService.update(department, id, bindingResult);
     }
 
 
-    private Department convertToEntity(DepartmentDTO departmentDTO)  {
+    private Department convertToEntity(DepartmentDTO departmentDTO) {
         Department department = modelMapper.map(departmentDTO, Department.class);
         department.setCompany(companyService.getOne(departmentDTO.getCompany_id()));
         return department;

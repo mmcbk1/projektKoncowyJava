@@ -9,7 +9,7 @@ import java.util.List;
 public interface GenericService<T> {
 
 
-    T create(T t);
+    T create(T t, BindingResult bindingResult);
 
     T getOne(Long id);
 

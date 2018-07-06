@@ -1,8 +1,6 @@
 package com.bkpw.projektkoncowy.controller;
 
-import com.bkpw.projektkoncowy.dto.DepartmentDTO;
 import com.bkpw.projektkoncowy.dto.UserDTO;
-import com.bkpw.projektkoncowy.entity.Department;
 import com.bkpw.projektkoncowy.entity.User;
 import com.bkpw.projektkoncowy.service.UserService;
 import org.modelmapper.ModelMapper;
@@ -13,9 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.jws.soap.SOAPBinding;
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 public class UserController {

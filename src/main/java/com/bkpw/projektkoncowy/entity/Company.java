@@ -8,6 +8,9 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -26,10 +29,8 @@ public class Company extends BaseEntity{
     @Column(name = "nip",unique = true)
     private String nip;
 
-
     @Column(name = "phone_no")
     private String phone;
-
 
     @Column(name = "fax")
     private String fax;

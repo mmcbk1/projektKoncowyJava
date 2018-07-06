@@ -23,13 +23,13 @@ public class UserService implements GenericService<User> {
     @Autowired
     UserRepository userRepository;
 
-
+    @Override
     public User create(User user, BindingResult bindingResult) {
         validate(user, null, bindingResult);
         return create(user);
     }
 
-    @Override
+
     public User create(User user) {
         String newPassword = user.getPassword();
         if (StringUtils.hasText(newPassword)) {
@@ -46,7 +46,6 @@ public class UserService implements GenericService<User> {
         if (!user.isPresent()) {
             throw new NotFoundException(String.format("User with id %s not found", id));
         }
-
         return user.get();
     }
 
@@ -57,7 +56,7 @@ public class UserService implements GenericService<User> {
 
     @Override
     public void delete(Long id) {
-        if (userRepository.existsById(id)) {
+        if (!userRepository.existsById(id)) {
             throw new NotFoundException(String.format("User with id: %s not found", id));
         }
         userRepository.deleteById(id);
@@ -77,9 +76,9 @@ public class UserService implements GenericService<User> {
 
     private void validate(User user, String currentUsername, BindingResult bindingResult) {
         if (!user.getName().equals(currentUsername)
-                && userRepository.existsByUsername(user.getName())) {
+                && userRepository.existsByName(user.getName())) {
             bindingResult.addError(
-                    new FieldError("user", "field",
+                    new FieldError("user", "name",
                             String.format("User with username %s already exists", user.getName())));
         }
         if (bindingResult.hasErrors()) {

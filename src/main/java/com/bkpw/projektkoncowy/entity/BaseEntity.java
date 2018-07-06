@@ -16,7 +16,7 @@ import static javax.persistence.TemporalType.TIMESTAMP;
 @Data
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.JOINED)
-@JsonIgnoreProperties(value = {"createdAt", "updatedAt"},allowGetters = true)
+@JsonIgnoreProperties(value = {"created_at", "updated_at"},allowGetters = true)
 @EntityListeners(AuditingEntityListener.class)
 public  abstract class BaseEntity {
 
