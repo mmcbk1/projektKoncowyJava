@@ -42,7 +42,7 @@ public class ControllerHandlerEx {
     }
 
     @ExceptionHandler(PasswordException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
     @ResponseBody
     public String notEqualPasswordException(PasswordException ex) {
         return ex.getMessage();
