@@ -4,6 +4,7 @@ package com.bkpw.projektkoncowy.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -20,6 +21,8 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User extends BaseEntity {
+
+
 
     @Column(name = "name")
     private String name;

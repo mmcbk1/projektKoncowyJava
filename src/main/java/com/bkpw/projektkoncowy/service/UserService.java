@@ -67,12 +67,14 @@ public class UserService implements GenericService<User> {
     }
 
 
+
+
     private void validate(User user, String currentUsername, BindingResult bindingResult) {
-        if (!user.getName().equals(currentUsername)
-                && userRepository.existsByName(user.getName())) {
+        if (!user.getEmail().equals(currentUsername)
+                && userRepository.existsByEmail(user.getEmail())) {
             bindingResult.addError(
-                    new FieldError("user", "name",
-                            String.format("User with username %s already exists", user.getName())));
+                    new FieldError("user", "email",
+                            String.format("User with email %s already exists", user.getEmail())));
         }
         if (bindingResult.hasErrors()) {
             throw new BindingResultException(bindingResult);

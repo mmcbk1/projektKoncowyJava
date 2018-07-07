@@ -35,7 +35,7 @@ public class UserController {
         User user=convertToEntity(userDTO);
         user.setPosition(positionRepository.getOne(userDTO.getPosition()));
 
-        if (userDTO.getPassword().equals(userDTO.getRepeatPassword())) {
+        if (!userDTO.getPassword().equals(userDTO.getRepeatPassword())) {
             throw new PasswordException(String.format("Passwords are not the same"));
         }
         return userService.create(user,bindingResult);
