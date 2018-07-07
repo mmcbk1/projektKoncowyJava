@@ -27,8 +27,8 @@
                     .then(function(response){
                         console.log(response.data);
                             vm.$router.push({
-                                name:'company-single',
-                                params:{cid:vm.$route.params.cid}
+                                name:'department-single',
+                                params:{cid:vm.$route.params.did}
                             });
                     },
                     function(error){
