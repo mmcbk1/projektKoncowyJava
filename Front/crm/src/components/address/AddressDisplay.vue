@@ -9,14 +9,7 @@
             <div>Nr domu/lokalu {{address.street_number}}</div>
             <div>Ulica {{address.street}}</div>
         </section>
-        <section v-if="list.length">
-            <h3>Lista użytkowników</h3>
-            <ul>
-                <li v-for="item in list" :key="item.id">
-                    {{item.name}}
-                </li>
-            </ul>
-        </section>
+
     </div>
 </template>
 
@@ -24,8 +17,6 @@
     export default {
         props:{
             address: Object,
-            listName : String,
-            list : Array
         }
     }
 </script>

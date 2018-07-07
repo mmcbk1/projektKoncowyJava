@@ -15,15 +15,9 @@
                 <div>NIP {{company.nip}}</div>
                 <div>Nr tel {{company.phone_no}}</div>
             </section>
-            <section>
-                <h3>Dane adresowe</h3>
-                <div>Miasto {{company.city}}</div>
-                <div>Państwo {{company.country}}</div>
-                <div>Kod pocztowy {{company.postal_code}}</div>
-                <div>Województwo {{company.state}}</div>
-                <div>Nr domu/lokalu {{company.street_number}}</div>
-                <div>Ulica {{company.street}}</div>
-            </section>
+            <crm-address-display
+                    :address="company.address"
+            ></crm-address-display>
             <section v-if="company.departments.length">
                 <h3>Lista działów</h3>
                 <ul>
@@ -41,6 +35,7 @@
 </template>
 
 <script>
+    import AddressDisplay from '../address/AddressDisplay'
     export default {
         data(){
             return {

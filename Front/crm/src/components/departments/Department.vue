@@ -23,10 +23,24 @@
                 <div>Krótka nazwa {{department.shortName}}</div>
             </section>
             <crm-address-display
-                    :list="department.users"
                     :address="department.address"
-                    listName="List użytkowników"></crm-address-display>
+                 ></crm-address-display>
+            <section v-if="department.users">
+                <h3>Lista użytkowników</h3>
+                <ul>
+                    <li v-for="user in department.users" :key="user.id">
+                        <router-link :to="{name:'user-single', params:{
+                        cid:$route.params.cid,
+                        did:$route.params.did,
+                        uid:user.id,
+                        }}">
+                            {{user.name}}
+                            {{user.lastName}}
+                        </router-link>
 
+                    </li>
+                </ul>
+            </section>
             <section v-if="department.positions.length">
                 <h3>Stanowiska</h3>
                 <div v-for="(position, i) in department.positions">

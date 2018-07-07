@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <router-link tag="li" :to="{name:'companies'}">
       <a>Companies</a>
     </router-link>

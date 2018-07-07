@@ -27,7 +27,7 @@
             </div>
             <div>
                 <label for="passwordConfirm">Potwierdź hasło</label>
-                <input id="passwordConfirm" type="password" v-model="user.passwordConfirm">
+                <input id="passwordConfirm" type="password" v-model="user.repeatPassword">
             </div>
             <div>
                 <label for="salary">Zarobki</label>

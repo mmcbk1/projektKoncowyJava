@@ -6,6 +6,7 @@ import CompanyCreate from './components/companies/Create';
 import DepartmentCreate from './components/departments/Create';
 import UserCreate from './components/users/Create';
 import PositionCreate from './components/positions/Create';
+import User from './components/users/User';
 import Department from './components/departments/Department';
 
 export const routes = [
@@ -16,6 +17,7 @@ export const routes = [
             {path: ':cid/department/create', name:'department-create', component:DepartmentCreate},
             {path: ':cid/department/:did', name:'department-single', component:Department},
             {path: ':cid/department/:did/user/create', name:'user-create', component:UserCreate},
+            {path: ':cid/department/:did/user/:uid', name:'user-single', component:User},
             {path: 'users', name:'users', component:Users},
             {path: 'create', name:'company-create', component:CompanyCreate},
         ]}
