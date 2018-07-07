@@ -7,6 +7,7 @@ import com.bkpw.projektkoncowy.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
@@ -20,6 +21,9 @@ public class UserService implements GenericService<User> {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Override
     public User create(User user, BindingResult bindingResult) {
         validate(user, null, bindingResult);
@@ -29,6 +33,7 @@ public class UserService implements GenericService<User> {
 
 
     public User create(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 

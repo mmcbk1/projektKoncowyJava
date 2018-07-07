@@ -1,6 +1,7 @@
 package com.bkpw.projektkoncowy.controller;
 
 import com.bkpw.projektkoncowy.dto.UserDTO;
+import com.bkpw.projektkoncowy.dto.UserDetailsDTO;
 import com.bkpw.projektkoncowy.entity.User;
 import com.bkpw.projektkoncowy.exception.NotFoundException;
 import com.bkpw.projektkoncowy.exception.PasswordException;
@@ -15,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 public class UserController {
@@ -49,8 +51,10 @@ public class UserController {
 
     @GetMapping("/user/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public User getOne(@PathVariable Long id){
-        return userService.getOne(id);
+    public UserDetailsDTO getOne(@PathVariable Long id){
+        User user=userService.getOne(id);
+        UserDetailsDTO userDetailsDTO= modelMapper.map(user,UserDetailsDTO.class);
+        return userDetailsDTO;
     }
 
     @DeleteMapping("user/{id}")

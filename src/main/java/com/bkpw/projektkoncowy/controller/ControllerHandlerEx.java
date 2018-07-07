@@ -26,7 +26,7 @@ public class ControllerHandlerEx {
 
 
     @ExceptionHandler(ValidationException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
     @ResponseBody
     public String handleValidationException(ValidationException ex) {
         return ex.getMessage();
@@ -35,7 +35,7 @@ public class ControllerHandlerEx {
 
 
     @ExceptionHandler(BindingResultException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
     @ResponseBody
     public Map<String, String> handleNotFoundException(BindingResultException ex) {
         return getErrors(ex.getBindingResult());
