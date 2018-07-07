@@ -24,8 +24,8 @@
     export default {
         props:{
             address: Object,
-            list: Object,
-            listName : String
+            listName : String,
+            list : Array
         }
     }
 </script>

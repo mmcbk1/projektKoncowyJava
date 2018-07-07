@@ -10,7 +10,7 @@
                 </router-link>
             </section>
             <section>
-                <h3>Nazwa firmy: {{department.company.name}}</h3>
+                <h3>Nazwa firmy: {{department.companyName}}</h3>
                 <div>Nazwa {{department.name}}</div>
                 <div>Krótka nazwa {{department.shortName}}</div>
             </section>
@@ -36,7 +36,8 @@
                 department: {
                     name: '',
                     shortName: '',
-                    users: {},
+                    companyName: '',
+                    users: [],
                     address: {},
                     company: {
                         name: ''
@@ -51,11 +52,7 @@
                 return axios.get('department/'+did)
                     .then(function (response) {
                         console.log(response.data);
-
-                            vm.department.name= response.data.name;
-                            vm.department.shortName= response.data.shortName;
-                            vm.department.address = response.data.address;
-
+                            vm.department = response.data;
                         },
                         function (error) {
 
