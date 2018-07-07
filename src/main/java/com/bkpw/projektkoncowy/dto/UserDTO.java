@@ -37,4 +37,8 @@ public class UserDTO extends BaseEntityDTO{
 
     private Long position;
 
+    private String password;
+
+    private String repeatPassword;
+
 }

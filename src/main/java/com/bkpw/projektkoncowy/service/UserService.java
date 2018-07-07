@@ -23,6 +23,7 @@ public class UserService implements GenericService<User> {
     @Override
     public User create(User user, BindingResult bindingResult) {
         validate(user, null, bindingResult);
+
         return create(user);
     }
 

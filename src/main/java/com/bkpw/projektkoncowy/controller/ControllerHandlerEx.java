@@ -2,6 +2,7 @@ package com.bkpw.projektkoncowy.controller;
 
 import com.bkpw.projektkoncowy.exception.BindingResultException;
 import com.bkpw.projektkoncowy.exception.NotFoundException;
+import com.bkpw.projektkoncowy.exception.PasswordException;
 import com.bkpw.projektkoncowy.exception.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
@@ -39,6 +40,14 @@ public class ControllerHandlerEx {
     public Map<String, String> handleNotFoundException(BindingResultException ex) {
         return getErrors(ex.getBindingResult());
     }
+
+    @ExceptionHandler(PasswordException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
+    public String notEqualPasswordException(PasswordException ex) {
+        return ex.getMessage();
+    }
+
 
     private Map<String, String> getErrors(final BindingResult bindingResult) {
         Map<String, String> errors = new HashMap<>();

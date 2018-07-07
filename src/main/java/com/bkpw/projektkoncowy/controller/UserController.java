@@ -2,6 +2,8 @@ package com.bkpw.projektkoncowy.controller;
 
 import com.bkpw.projektkoncowy.dto.UserDTO;
 import com.bkpw.projektkoncowy.entity.User;
+import com.bkpw.projektkoncowy.exception.NotFoundException;
+import com.bkpw.projektkoncowy.exception.PasswordException;
 import com.bkpw.projektkoncowy.repository.PositionRepository;
 import com.bkpw.projektkoncowy.service.UserService;
 import org.modelmapper.ModelMapper;
@@ -32,6 +34,10 @@ public class UserController {
                        BindingResult bindingResult){
         User user=convertToEntity(userDTO);
         user.setPosition(positionRepository.getOne(userDTO.getPosition()));
+
+        if (userDTO.getPassword().equals(userDTO.getRepeatPassword())) {
+            throw new PasswordException(String.format("Passwords are not the same"));
+        }
         return userService.create(user,bindingResult);
     }
 
