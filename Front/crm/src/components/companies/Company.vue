@@ -10,6 +10,14 @@
                 </router-link>
             </section>
             <section>
+                <router-link tag="div" :to="{
+                name:'position-create',
+                params:{cid:$route.params.cid}
+                }">
+                    <a>Dodaj Stanowisko</a>
+                </router-link>
+            </section>
+            <section>
                 <h3>Dane firmy</h3>
                 <div>Nazwa {{company.name}}</div>
                 <div>NIP {{company.nip}}</div>
