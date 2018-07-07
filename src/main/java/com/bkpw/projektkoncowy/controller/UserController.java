@@ -33,7 +33,7 @@ public class UserController {
     public User create(@RequestBody @Valid UserDTO userDTO,
                        BindingResult bindingResult){
         User user=convertToEntity(userDTO);
-        user.setPosition(positionRepository.getOne(userDTO.getPosition()));
+        user.setPosition(positionRepository.getOne(userDTO.getPositionId()));
 
         if (!userDTO.getPassword().equals(userDTO.getRepeatPassword())) {
             throw new PasswordException(String.format("Passwords are not the same"));
