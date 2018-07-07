@@ -2,7 +2,6 @@ package com.bkpw.projektkoncowy.dto;
 
 import com.bkpw.projektkoncowy.entity.Address;
 import com.bkpw.projektkoncowy.entity.Gender;
-import com.bkpw.projektkoncowy.entity.Position;
 import com.bkpw.projektkoncowy.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +14,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO extends BaseEntityDTO{
+public class UserDTO extends BaseEntityDTO {
 
     private String name;
 
@@ -33,9 +32,9 @@ public class UserDTO extends BaseEntityDTO{
 
     private Address address;
 
-    private Set<Role> userRoles;
+   // private Set<Role> userRoles;
 
-    private Long position;
+    private Long positionId;
 
     private String password;
 
