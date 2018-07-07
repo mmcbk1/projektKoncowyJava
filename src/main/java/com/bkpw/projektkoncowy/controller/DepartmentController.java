@@ -1,7 +1,9 @@
 package com.bkpw.projektkoncowy.controller;
 
 import com.bkpw.projektkoncowy.dto.DepartmentDTO;
+import com.bkpw.projektkoncowy.dto.UserDTO;
 import com.bkpw.projektkoncowy.entity.Department;
+import com.bkpw.projektkoncowy.entity.User;
 import com.bkpw.projektkoncowy.service.CompanyService;
 import com.bkpw.projektkoncowy.service.DepartmentService;
 import org.modelmapper.ModelMapper;
@@ -42,8 +44,10 @@ public class DepartmentController {
 
     @GetMapping("department/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Department getOne(@PathVariable Long id) {
-        return departmentService.getOne(id);
+    public DepartmentDTO getOne(@PathVariable Long id) {
+        DepartmentDTO departmentDTO= entityToDTO(departmentService.getOne(id));
+        departmentDTO.setCompanyName(departmentService.getOne(id).getCompany().getName());
+        return departmentDTO;
     }
 
 
@@ -66,6 +70,11 @@ public class DepartmentController {
         Department department = modelMapper.map(departmentDTO, Department.class);
         department.setCompany(companyService.getOne(departmentDTO.getCompany_id()));
         return department;
+    }
+
+    private DepartmentDTO entityToDTO(Department department){
+        DepartmentDTO departmentDTO=modelMapper.map(department,DepartmentDTO.class);
+        return departmentDTO;
     }
 
 
