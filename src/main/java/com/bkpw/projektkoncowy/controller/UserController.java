@@ -2,6 +2,7 @@ package com.bkpw.projektkoncowy.controller;
 
 import com.bkpw.projektkoncowy.dto.UserDTO;
 import com.bkpw.projektkoncowy.entity.User;
+import com.bkpw.projektkoncowy.repository.PositionRepository;
 import com.bkpw.projektkoncowy.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class UserController {
     UserService userService;
 
     @Autowired
+    PositionRepository positionRepository;
+
+    @Autowired
     ModelMapper modelMapper;
 
     @PostMapping("/user")
@@ -27,6 +31,7 @@ public class UserController {
     public User create(@RequestBody @Valid UserDTO userDTO,
                        BindingResult bindingResult){
         User user=convertToEntity(userDTO);
+        user.setPosition(positionRepository.getOne(userDTO.getPosition()));
         return userService.create(user,bindingResult);
     }
 
