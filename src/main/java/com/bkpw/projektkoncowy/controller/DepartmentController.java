@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 
 @RestController
 public class DepartmentController {
@@ -47,6 +48,9 @@ public class DepartmentController {
     public DepartmentDTO getOne(@PathVariable Long id) {
         DepartmentDTO departmentDTO= entityToDTO(departmentService.getOne(id));
         departmentDTO.setCompanyName(departmentService.getOne(id).getCompany().getName());
+        if(departmentDTO.getUsers()==null){
+            departmentDTO.setUsers(new ArrayList<>());
+        }
         return departmentDTO;
     }
 
