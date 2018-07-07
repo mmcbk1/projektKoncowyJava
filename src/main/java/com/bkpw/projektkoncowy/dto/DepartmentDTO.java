@@ -3,6 +3,7 @@ package com.bkpw.projektkoncowy.dto;
 import com.bkpw.projektkoncowy.entity.Address;
 import com.bkpw.projektkoncowy.entity.BaseEntity;
 import com.bkpw.projektkoncowy.entity.Company;
+import com.bkpw.projektkoncowy.entity.Position;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,4 +32,6 @@ public class DepartmentDTO extends BaseEntityDTO {
     private Address address;
 
     private String companyName;
+
+    private List<Position> positions;
 }

@@ -1,11 +1,14 @@
 package com.bkpw.projektkoncowy.controller;
 
 import com.bkpw.projektkoncowy.dto.DepartmentDTO;
+import com.bkpw.projektkoncowy.dto.PositionDTO;
 import com.bkpw.projektkoncowy.dto.UserDTO;
 import com.bkpw.projektkoncowy.entity.Department;
 import com.bkpw.projektkoncowy.entity.User;
+import com.bkpw.projektkoncowy.repository.PositionRepository;
 import com.bkpw.projektkoncowy.service.CompanyService;
 import com.bkpw.projektkoncowy.service.DepartmentService;
+import com.bkpw.projektkoncowy.service.PositionService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class DepartmentController {
@@ -25,6 +29,12 @@ public class DepartmentController {
 
     @Autowired
     CompanyService companyService;
+
+    @Autowired
+    PositionService positionService;
+
+    @Autowired
+    PositionRepository positionRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -48,8 +58,13 @@ public class DepartmentController {
     public DepartmentDTO getOne(@PathVariable Long id) {
         DepartmentDTO departmentDTO= entityToDTO(departmentService.getOne(id));
         departmentDTO.setCompanyName(departmentService.getOne(id).getCompany().getName());
+        departmentDTO.setPositions(positionRepository.findByDepartment_Id(id));
         if(departmentDTO.getUsers()==null){
             departmentDTO.setUsers(new ArrayList<>());
+        }
+
+        if(departmentDTO.getPositions()==null){
+            departmentDTO.setPositions(new ArrayList<>());
         }
         return departmentDTO;
     }
