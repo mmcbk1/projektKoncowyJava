@@ -2,14 +2,18 @@ package com.bkpw.projektkoncowy.controller;
 
 import com.bkpw.projektkoncowy.dto.DepartmentDTO;
 import com.bkpw.projektkoncowy.dto.PositionDTO;
+import com.bkpw.projektkoncowy.dto.SimpleUserDTO;
 import com.bkpw.projektkoncowy.dto.UserDTO;
 import com.bkpw.projektkoncowy.entity.Department;
 import com.bkpw.projektkoncowy.entity.User;
 import com.bkpw.projektkoncowy.repository.PositionRepository;
+import com.bkpw.projektkoncowy.repository.UserRepository;
 import com.bkpw.projektkoncowy.service.CompanyService;
 import com.bkpw.projektkoncowy.service.DepartmentService;
 import com.bkpw.projektkoncowy.service.PositionService;
+import com.bkpw.projektkoncowy.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +22,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +40,10 @@ public class DepartmentController {
 
     @Autowired
     PositionRepository positionRepository;
+
+    @Autowired
+    UserRepository userRepository;
+
 
     @Autowired
     private ModelMapper modelMapper;
@@ -56,14 +65,18 @@ public class DepartmentController {
     @GetMapping("department/{id}")
     @ResponseStatus(HttpStatus.OK)
     public DepartmentDTO getOne(@PathVariable Long id) {
-        DepartmentDTO departmentDTO= entityToDTO(departmentService.getOne(id));
+        DepartmentDTO departmentDTO = entityToDTO(departmentService.getOne(id));
         departmentDTO.setCompanyName(departmentService.getOne(id).getCompany().getName());
         departmentDTO.setPositions(positionRepository.findByDepartment_Id(id));
-        if(departmentDTO.getUsers()==null){
+        List<User> users=userRepository.findAll();
+        Type listType = new TypeToken<List<SimpleUserDTO>>() {}.getType();
+        List<SimpleUserDTO> lista= modelMapper.map(users,listType);
+        departmentDTO.setUsers(lista);
+        if (departmentDTO.getUsers() == null) {
             departmentDTO.setUsers(new ArrayList<>());
         }
 
-        if(departmentDTO.getPositions()==null){
+        if (departmentDTO.getPositions() == null) {
             departmentDTO.setPositions(new ArrayList<>());
         }
         return departmentDTO;
@@ -91,8 +104,8 @@ public class DepartmentController {
         return department;
     }
 
-    private DepartmentDTO entityToDTO(Department department){
-        DepartmentDTO departmentDTO=modelMapper.map(department,DepartmentDTO.class);
+    private DepartmentDTO entityToDTO(Department department) {
+        DepartmentDTO departmentDTO = modelMapper.map(department, DepartmentDTO.class);
         return departmentDTO;
     }
 
