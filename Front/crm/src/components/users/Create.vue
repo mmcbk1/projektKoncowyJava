@@ -15,6 +15,13 @@
                 <input id="email" type="email" v-model="user.email">
             </div>
             <div>
+                <label for="birthDate">Data urodzenia</label>
+                <date-picker
+                        id="birthDate"
+                        type="text"
+                        v-model="user.birthDate"></date-picker>
+            </div>
+            <div>
                 <label for="password">Hasło</label>
                 <input id="password" type="password" v-model="user.password">
             </div>
@@ -27,19 +34,29 @@
                 <input id="salary" type="text" v-model="user.salary">
             </div>
             <div>
+                <label for="birthDate">Data zatrudnienia</label>
+                <date-picker
+                        :format="customFormatter"
+                        id="hireDate"
+                        type="text"
+                        v-model="user.hireDate"></date-picker>
+            </div>
+            <div>
                 <div>
+                    <input id="male" type="radio" v-model="user.gender" value="MALE"/>
                     <label for="male">Mężczyzna</label>
-                    <input id="male" type="radio" v-model="user.gender" value="male"/>
                 </div>
                 <div>
+                    <input id="female" type="radio" v-model="user.gender" value="FEMALE"/>
                     <label for="female">Kobieta</label>
-                    <input id="female" type="radio" v-model="user.gender" value="female"/>
+
                 </div>
             </div>
             <div v-if="positions.length">
+                <h3>Wybierz stanowisko:</h3>
                 <div v-for="position in positions">
+                    <input :id="'position_'+position.id" type="radio" v-model="user.positionId" :value="position.id"/>
                     <label :for="'position_'+position.id">{{position.name}}</label>
-                    <input type="radio" v-model="user.position_id" :value="position.id"/>
                 </div>
             </div>
             <crm-address
@@ -54,8 +71,10 @@
 
 
 <script>
+    import {dataPickerMixin} from '../../mixins/dataPickerMixin'
     import Address from '../address/Address'
     export default {
+        mixins:[dataPickerMixin],
         data(){
             return {
                 user:{
@@ -63,10 +82,12 @@
                     lastName:'',
                     email: '',
                     password:'',
-                    passwordConfirm: '',
+                    hireDate:'',
+                    birthDate: '',
+                    repeatPassword: '',
                     salary: 0,
-                    gender : 'male',
-                    position_id: 0,
+                    gender : 'MALE',
+                    positionId: 0,
                     address:{},
                 },
                 positions:[],
@@ -79,9 +100,20 @@
             updateAddress(address){
                 this.user.address = address;
             },
+            getPositions(){
+             let vm = this;
+                return axios.get('positions')
+                    .then(function(response){
+                          vm.positions = response.data;
+                        },
+                        function(error){
+                            console.log(error);
+                        });
+            },
             storeUser(){
                 let vm = this;
-                return axios.post('user', this.department)
+                console.log(this.user);
+                return axios.post('user', this.user)
                     .then(function(response){
                             vm.$router.push({
                                 name:'department-single',
@@ -95,6 +127,9 @@
                             console.log(error);
                         });
             }
+        },
+        created(){
+            this.getPositions();
         }
     }
 </script>

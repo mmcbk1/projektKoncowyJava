@@ -16,16 +16,16 @@
             return{
                 position:{
                     name: '',
-                    department_id : this.$route.params.did,
+                    departmentId : this.$route.params.did,
                 }
             }
         },
         methods:{
 
             storePosition(){
+                let vm = this;
                 return axios.post('position', this.position)
                     .then(function(response){
-                        console.log(response.data);
                             vm.$router.push({
                                 name:'department-single',
                                 params:{cid:vm.$route.params.did}

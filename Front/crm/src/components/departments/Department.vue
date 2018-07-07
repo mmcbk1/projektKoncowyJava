@@ -26,6 +26,14 @@
                     :list="department.users"
                     :address="department.address"
                     listName="List użytkowników"></crm-address-display>
+
+            <section v-if="department.positions.length">
+                <h3>Stanowiska</h3>
+                <div v-for="(position, i) in department.positions">
+                    <span>{{position.name}}</span>
+                    <span @click="deletePosition(position.id, i)"> usuń</span>
+                </div>
+            </section>
         </article>
 
     </div>
@@ -46,10 +54,8 @@
                     shortName: '',
                     companyName: '',
                     users: [],
+                    positions:[],
                     address: {},
-                    company: {
-                        name: ''
-                    },
                 }
             }
         },
@@ -65,6 +71,17 @@
                         function (error) {
 
                         })
+            },
+            deletePosition(id, i){
+                let vm = this;
+                console.log(i);
+               return axios.delete('position/'+id)
+                    .then(function(response){
+                           vm.department.position.slice(i,1);
+                    },
+                    function(error){
+
+                    })
             }
         },
         created() {
