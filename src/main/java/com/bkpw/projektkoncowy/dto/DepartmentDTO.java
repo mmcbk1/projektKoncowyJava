@@ -24,9 +24,11 @@ public class DepartmentDTO extends BaseEntityDTO {
 
     private String shortName;
 
-    private List<Long> users;
-
     private Long company_id;
 
+    private List<Long> users;
+
     private Address address;
+
+    private String companyName;
 }
