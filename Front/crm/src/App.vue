@@ -1,11 +1,14 @@
 <template>
   <div class="container">
-    <router-link tag="li" :to="{name:'companies'}">
-      <a>Companies</a>
-    </router-link>
-    <router-link tag="li" :to="{name:'users'}">
-      <a>Messages</a>
-    </router-link>
+    <nav class="navbar navbar-dark bg-warning">
+      <router-link class="navbar-brand"  :to="{name:'companies'}">
+        Companies
+      </router-link>
+      <router-link class="navbar-brand"  :to="{name:'users'}">
+        Messages
+      </router-link>
+    </nav>
+
     <div>
       <router-view></router-view>
     </div>

@@ -11,11 +11,14 @@
             <crm-address-display
                     :address="user.address"
             ></crm-address-display>
-            <section class="form-group">
-                <textarea class="form-control" placeholder="napisz do mnie.."></textarea>
+            <section>
+                <div class="form-group">
+                    <textarea class="form-control" placeholder="napisz do mnie.."></textarea>
+                </div>
                 <div class="form-group">
                     <button class="btn btn-success">Wyślij</button>
                 </div>
+
             </section>
         </article>
 
