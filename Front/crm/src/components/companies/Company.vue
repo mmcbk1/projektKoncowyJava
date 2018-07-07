@@ -28,7 +28,10 @@
                 <h3>Lista działów</h3>
                 <ul>
                     <li v-for="department in company.departments" :key="department.id">
-                        {{department.name}}
+                        <router-link :to="{
+                        name:'department-single',
+                        params:{cid:$route.params.cid, did:department.id}
+                        }">{{department.name}}</router-link>
                     </li>
                 </ul>
             </section>

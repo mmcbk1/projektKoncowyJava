@@ -28,7 +28,7 @@
                return axios.get('companies')
                     .then(function (response) {
                         console.log(response);
-                            vm.companies = response.data;
+                            vm.companies = response.data.content;
                         },
                         function (error) {
 
@@ -36,7 +36,6 @@
             }
         },
         created(){
-            console.log('created');
             this.fetchCompanies();
         }
     }
