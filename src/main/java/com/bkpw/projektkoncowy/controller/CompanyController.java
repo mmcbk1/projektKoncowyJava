@@ -3,49 +3,50 @@ package com.bkpw.projektkoncowy.controller;
 import com.bkpw.projektkoncowy.entity.Company;
 import com.bkpw.projektkoncowy.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import javax.transaction.Transactional;
-import java.util.List;
+import javax.validation.Valid;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8081")
 public class CompanyController {
 
     @Autowired
     CompanyService companyService;
 
-
     @PostMapping("/company")
     @ResponseStatus(HttpStatus.CREATED)
-    public Company create(@RequestBody Company company) {
-        return companyService.create(company);
+    public Company create(@RequestBody @Valid Company company,
+                          BindingResult bindingResult) {
+        return companyService.create(company,bindingResult);
     }
 
     @GetMapping("/companies")
     @ResponseStatus(HttpStatus.OK)
-    public List<Company> getAll(){
-        return companyService.getAll();
+    public Page<Company> getAll(Pageable pageable) {
+        return companyService.getAll(pageable);
     }
 
     @GetMapping("company/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Company getOne(@PathVariable Long id){
+    public Company getOne(@PathVariable Long id) {
         return companyService.getOne(id);
     }
 
-
     @DeleteMapping("company/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id){
+    public void delete(@PathVariable Long id) {
         companyService.delete(id);
     }
 
     @PutMapping("company/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable Long id, @RequestBody Company company){
-        companyService.update(company,id);
+    public Company update(@PathVariable Long id,
+                          @RequestBody @Valid Company company,
+                          BindingResult bindingResult) {
+        return companyService.update(company, id, bindingResult);
     }
 
 

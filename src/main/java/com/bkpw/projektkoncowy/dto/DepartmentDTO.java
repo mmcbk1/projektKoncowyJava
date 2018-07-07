@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.List;
 
 
 @Data
@@ -17,14 +19,12 @@ import javax.validation.constraints.NotNull;
 public class DepartmentDTO extends BaseEntityDTO {
 
 
+
     private String name;
 
     private String shortName;
 
-  /*  @OneToMany(
-            mappedBy = "department")
-    private List<User> users;
-*/
+    private List<Long> users;
 
     private Long company_id;
 

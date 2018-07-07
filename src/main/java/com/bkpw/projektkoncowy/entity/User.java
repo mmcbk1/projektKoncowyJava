@@ -1,7 +1,9 @@
 package com.bkpw.projektkoncowy.entity;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -15,44 +17,44 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "User")
+@NoArgsConstructor
+@AllArgsConstructor
 public class User extends BaseEntity {
 
-    @NotNull
-    @Size(min=1, max=16)
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @NotNull
-    @Column(name = "last_name", nullable = false)
+
+    @Column(name = "last_name")
     private String lastName;
 
-    @NotNull
-    @Column(name = "email", nullable = false, unique = true)
+
+    @Column(name = "email")
     @Email(message = "Email should be valid")
     private String email;
 
-    @NotNull
+
     @Enumerated(EnumType.STRING)
-    @Column(name = "gender", nullable = false)
+    @Column(name = "gender")
     private Gender gender;
 
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "birth_date", nullable = false)
+    @Column(name = "birth_date")
     @Past
     private Date birthDate;
 
-    @NotNull
-    @Column(name = "salary", nullable = false)
+
+    @Column(name = "salary")
     private Integer salary;
 
-    @NotNull
+
     @Temporal(TemporalType.DATE)
-    @Column(name = "hire_date", nullable = false)
+    @Column(name = "hire_date")
     private Date hireDate;
 
-    @NotNull
-    @Column(name = "password", nullable = false)
+
+    @Column(name = "password")
     private String password;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -60,7 +62,7 @@ public class User extends BaseEntity {
     private Address address;
 
 
-    @Column(name = "roles", nullable = false)
+    @Column(name = "roles")
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "role_id"),

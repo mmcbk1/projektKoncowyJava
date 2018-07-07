@@ -1,5 +1,6 @@
 package com.bkpw.projektkoncowy.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,7 @@ import java.util.List;
 public class Department extends BaseEntity {
 
     @NotNull
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false,unique = true)
     private String name;
 
     @NotNull
@@ -30,12 +31,14 @@ public class Department extends BaseEntity {
 */
     @ManyToOne
     @JoinColumn(name = "company_id")
+    @JsonBackReference
     private Company company;
 
     @NotNull
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id",
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @MapsId
+/*    @JoinColumn(name = "address_id",
             referencedColumnName = "id",
-            nullable = false)
+            nullable = false)*/
     private Address address;
 }

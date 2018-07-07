@@ -1,6 +1,7 @@
 package com.bkpw.projektkoncowy.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,9 +16,15 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public  abstract class BaseEntityDTO {
+public abstract class BaseEntityDTO {
 
+
+    Long id;
+
+    @JsonIgnore
     private Date created_at;
 
+    @JsonIgnore
     private Date updated_at;
+
 }
