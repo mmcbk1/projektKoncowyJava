@@ -39,7 +39,7 @@ public class DepartmentService implements GenericService<Department> {
                                    String companyName,
                                    Pageable pageable){
 
-        return departmentRepository.findByNameIgnoreCaseAndShortNameIgnoreCaseAndCompany_NameIgnoreCase(name,shortName,companyName,pageable);
+        return departmentRepository.findByNameContainingIgnoreCaseAndShortNameContainingIgnoreCaseAndCompany_NameContainingIgnoreCase(name,shortName,companyName,pageable);
     }
 
     public Department getOne(Long id) {
