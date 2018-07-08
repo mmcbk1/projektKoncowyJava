@@ -53,7 +53,9 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public UserDetailsDTO getOne(@PathVariable Long id){
         User user=userService.getOne(id);
+
         UserDetailsDTO userDetailsDTO= modelMapper.map(user,UserDetailsDTO.class);
+     //   userDetailsDTO.getDepartmentDTO().;
         return userDetailsDTO;
     }
 

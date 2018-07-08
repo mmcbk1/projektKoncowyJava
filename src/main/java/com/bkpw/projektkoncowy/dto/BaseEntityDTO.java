@@ -27,4 +27,7 @@ public abstract class BaseEntityDTO {
     @JsonIgnore
     private Date updated_at;
 
+    public BaseEntityDTO(Long id) {
+
+    }
 }
