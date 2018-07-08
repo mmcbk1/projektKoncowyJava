@@ -1,22 +1,21 @@
 package com.bkpw.projektkoncowy.controller;
 
-import com.bkpw.projektkoncowy.dto.UserDTO;
-import com.bkpw.projektkoncowy.dto.UserDetailsDTO;
+import com.bkpw.projektkoncowy.dto.*;
 import com.bkpw.projektkoncowy.entity.User;
-import com.bkpw.projektkoncowy.exception.NotFoundException;
 import com.bkpw.projektkoncowy.exception.PasswordException;
 import com.bkpw.projektkoncowy.repository.PositionRepository;
 import com.bkpw.projektkoncowy.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class UserController {
@@ -48,6 +47,36 @@ public class UserController {
     public Page<User> getAll(Pageable pageable){
         return userService.getAll(pageable);
     }
+
+
+    @GetMapping("/users/search")
+    @ResponseStatus(HttpStatus.OK)
+    public PageImpl<SearchUserDTO> search(
+            @RequestParam(value = "name", required = false, defaultValue = "") String name,
+            @RequestParam(value = "lastName", required = false, defaultValue = "") String lastName,
+            @RequestParam(value = "email", required = false, defaultValue = "") String email,
+            @RequestParam(value = "companyName", required = false, defaultValue = "") String companyName,
+            @RequestParam(value = "positionName", required = false, defaultValue = "") String positionName,
+            Pageable pageable) {
+
+        Page<User> result=userService.search(name,lastName,email,companyName,positionName,pageable);
+        int totalElements = (int) result.getTotalElements();
+
+        return new PageImpl<SearchUserDTO>(result
+                .stream()
+                .map(user -> new SearchUserDTO(
+                        user.getId(),
+                        user.getName(),
+                        user.getLastName(),
+                        user.getEmail(),
+                        user.getPosition().getDepartment().getCompany().getName(),
+                        user.getPosition().getDepartment().getCompany().getId(),
+                        user.getPosition().getName()
+                ))
+                .collect(Collectors.toList()), pageable, totalElements);
+    }
+
+
 
     @GetMapping("/user/{id}")
     @ResponseStatus(HttpStatus.OK)
