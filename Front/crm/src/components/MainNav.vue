@@ -1,10 +1,10 @@
 <template>
-    <div>
-        <router-link tag="li" :to="{name:'users'}">
-            <a>Users</a>
+    <div class="jumbotron">
+        <router-link tag="li" :to="{name:'users-search'}">
+            <a>Użytkownicy</a>
         </router-link>
-        <router-link tag="li" :to="{name:'users'}">
-            <a>Departments</a>
+        <router-link tag="li" :to="{name:'departments-search'}">
+            <a>Stanowiska</a>
         </router-link>
         <router-view></router-view>
     </div>

@@ -13,7 +13,7 @@
             ></crm-address-display>
             <section>
                 <div class="form-group">
-                    <textarea class="form-control" placeholder="napisz do mnie.."></textarea>
+                    <textarea v-model="message.content" class="form-control" placeholder="napisz do mnie.."></textarea>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-success">Wyślij</button>
@@ -42,6 +42,9 @@
                     department:{},
                     company: {},
                     address: {},
+                },
+                message:{
+                    content:''
                 }
             }
         },
