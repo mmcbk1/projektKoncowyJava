@@ -11,7 +11,7 @@
       </div>
     </nav>
 
-    <div  class="container">
+    <div  class="container jumbotron">
       <router-view></router-view>
     </div>
   </div>

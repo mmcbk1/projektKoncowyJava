@@ -9,15 +9,14 @@ export const prepareGetParams = {
             let param = '';
             let urlExplode = this.url.split('?');
 
-            if(urlExplode.length > 1){
+            if(urlExplode.length > 1 && urlExplode[1]){
                 param += '&';
             }
 
-            if (this[obj][name]) {
-                return param += name + '=' + this[obj][name];
+            if (obj[name]) {
+                this.url += param += name + '=' + obj[name];
             }
 
-            return '';
         },
         resetUrl(){
             this.url = '?';

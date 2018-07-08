@@ -1,13 +1,18 @@
 <template>
-    <div class="jumbotron">
-        <router-link tag="li" :to="{name:'users-search'}">
-            <a>Użytkownicy</a>
-        </router-link>
-        <router-link tag="li" :to="{name:'departments-search'}">
-            <a>Stanowiska</a>
-        </router-link>
-        <router-view></router-view>
-    </div>
+   <div>
+       <nav class="navbar navbar-default">
+           <router-link class="navbar-brand"  :to="{name:'users-search'}">
+             Użytkownicy
+           </router-link>
+           <router-link class="navbar-brand" :to="{name:'departments-search'}">
+              Stanowiska
+           </router-link>
+       </nav>
+       <div>
+           <router-view></router-view>
+       </div>
+   </div>
+
 </template>
 
 <script>

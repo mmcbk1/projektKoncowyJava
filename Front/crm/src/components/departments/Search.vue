@@ -2,11 +2,11 @@
     <article>
         <div class="form-group col-md-2 col-md-offset-3">
             <label>Nazwa</label>
-            <input class="form-control" v-model="department.name" type="text"/>
+            <input @blur="search" class="form-control" v-model="department.name" type="text"/>
         </div>
         <div class="form-group col-md-2">
             <label>Krótka nazwa</label>
-            <input class="form-control" v-model="department.shortName" type="text"/>
+            <input @blur="search" class="form-control" v-model="department.shortName" type="text"/>
         </div>
         <div class="form-group col-md-2">
             <label>Firma</label>
@@ -55,12 +55,12 @@
         },
         methods: {
             search() {
-                let name = this.prepareUrl('name', this.department);
-                let shortName = this.prepareUrl('shortName', this.department);
-                let companyName = this.prepareUrl('companyName', this.department);
+               this.prepareUrl('name', this.department);
+               this.prepareUrl('shortName', this.department);
+               this.prepareUrl('companyName', this.department);
                 let vm = this;
 
-                return axios.get('search/departments' + name + shortName + companyName)
+                return axios.get('search/departments' + this.url)
                     .then(function (response) {
                             console.log(response.data);
                         },
