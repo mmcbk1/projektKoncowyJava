@@ -34,6 +34,14 @@ public class DepartmentService implements GenericService<Department> {
         return departmentRepository.findAll(pageable);
     }
 
+    public Page<Department> search(String name,
+                                   String shortName,
+                                   String companyName,
+                                   Pageable pageable){
+
+        return departmentRepository.findByNameIgnoreCaseAndShortNameIgnoreCaseAndCompany_NameIgnoreCase(name,shortName,companyName,pageable);
+    }
+
     public Department getOne(Long id) {
         Optional<Department> department = departmentRepository.findById(id);
         if (!department.isPresent()) {

@@ -1,10 +1,10 @@
 package com.bkpw.projektkoncowy.repository;
 
 import com.bkpw.projektkoncowy.entity.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -13,4 +13,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Boolean existsByEmail(String email);
 
+    Page<User> findByNameIgnoreCaseAndLastNameIgnoreCaseAndEmailIgnoreCaseAndPosition_Department_Company_NameAndPosition_NameIgnoreCase(
+            String name,
+            String lastName,
+            String email,
+            String companyName,
+            String positionName,
+            Pageable pageable
+    );
 }

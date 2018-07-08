@@ -52,6 +52,16 @@ public class UserService implements GenericService<User> {
         return userRepository.findAll(pageable);
     }
 
+    public Page<User> search(String name,
+                             String lastName,
+                             String email,
+                             String companyName,
+                             String positionName,
+                             Pageable pageable) {
+        return userRepository.findByNameIgnoreCaseAndLastNameIgnoreCaseAndEmailIgnoreCaseAndPosition_Department_Company_NameAndPosition_NameIgnoreCase(name, lastName, email, companyName, positionName,pageable);
+    }
+
+
     @Override
     public void delete(Long id) {
         if (!userRepository.existsById(id)) {
@@ -70,8 +80,6 @@ public class UserService implements GenericService<User> {
         user.setId(id);
         return userRepository.save(user);
     }
-
-
 
 
     private void validate(User user, String currentUsername, BindingResult bindingResult) {
