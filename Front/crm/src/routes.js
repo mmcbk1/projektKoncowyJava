@@ -23,8 +23,11 @@ export const routes = [
             {path: ':cid/department/:did/user/:uid', name:'user-single', component:User},
             {path: 'users', name:'users-search', component:UsersSearch},
             {path: 'departments', name:'departments-search', component: DepartmentSearch},
-            {path: 'messages', name:'messages', component: MessagesList},
-            {path: 'messages/:recipientId', name:'chat', component:Chat},
+
             {path: 'create', name:'company-create', component:CompanyCreate},
-        ]}
+        ]},
+    {path: '/messages', name:'', component: MainNav, children:[
+            {path: '', name:'messages', component: MessagesList},
+            {path: ':recipientId', name:'chat', component:Chat},
+        ]},
 ];

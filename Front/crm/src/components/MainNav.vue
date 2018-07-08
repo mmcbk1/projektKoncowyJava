@@ -5,7 +5,7 @@
              Użytkownicy
            </router-link>
            <router-link class="navbar-brand" :to="{name:'departments-search'}">
-              Stanowiska
+              Działy
            </router-link>
        </nav>
        <div>
@@ -18,10 +18,16 @@
 <script>
     export default {
         name: "main-nav",
-
     }
 </script>
 
-<style scoped>
-
+<style >
+    .router-link-active{
+        transition: background-color ease .3s;
+        background-color: rgba(158, 158, 158, .3) !important;
+    }
+    .router-link-exact-active{
+        transition: background-color ease .3s;
+        background-color: rgba(158, 158, 158, .3) !important;
+    }
 </style>

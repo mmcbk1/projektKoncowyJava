@@ -41,3 +41,9 @@ export default {
     }
 }
 </script>
+<style>
+  .my-label{
+    min-width: 60px;
+    display: inline-block;
+  }
+</style>
