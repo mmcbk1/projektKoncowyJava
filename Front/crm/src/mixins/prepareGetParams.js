@@ -14,7 +14,7 @@ export const prepareGetParams = {
             }
 
             if (obj[name]) {
-                this.url += param += name + '=' + obj[name];
+                this.url += param + name + '=' + obj[name];
             }
 
         },
