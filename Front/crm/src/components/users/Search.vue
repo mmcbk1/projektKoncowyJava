@@ -56,7 +56,7 @@
         mixins: [prepareGetParams],
         data() {
             return {
-                searchUrl: '/search/companies',
+                searchUrl: '/users/search',
                 results: [],
                 user: {
                     name: '',
@@ -76,11 +76,11 @@
                 url += this.addToUrlGet(url, 'email', this.user.email);
                 url += this.addToUrlGet(url, 'companyName', this.user.companyName);
                 url += this.addToUrlGet(url, 'departmentName', this.user.departmentName);
-
+                let vm = this;
                 return axios.get(url)
                     .then(function (response) {
                             console.log(response.data);
-                            this.results = response.data;
+                            vm.results = response.data.content;
                         },
                         function (error) {
 

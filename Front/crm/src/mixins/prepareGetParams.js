@@ -12,7 +12,7 @@ export const prepareGetParams = {
             prefix = url.match(pattern)
                 ? '&'
                 : '?';
-            
+
            return prefix + name + '=' + encodeURI(value);
         },
     }
