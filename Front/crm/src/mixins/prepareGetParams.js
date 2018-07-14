@@ -1,25 +1,19 @@
 export const prepareGetParams = {
-    data(){
-        return {
-            url: '?',
-        }
+    data() {
+        return {}
     },
-    methods:{
-        prepareUrl(name, obj) {
-            let param = '';
-            let urlExplode = this.url.split('?');
-
-            if(urlExplode.length > 1 && urlExplode[1]){
-                param += '&';
+    methods: {
+        addToUrlGet(url, name, value) {
+            if(!value){
+                return '';
             }
-
-            if (obj[name]) {
-                this.url += param + name + '=' + obj[name];
-            }
-
+            let pattern = '[\?]';
+            let prefix = '';
+            prefix = url.match(pattern)
+                ? '&'
+                : '?';
+            
+           return prefix + name + '=' + encodeURI(value);
         },
-        resetUrl(){
-            this.url = '?';
-        }
     }
 };

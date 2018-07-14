@@ -1,20 +1,35 @@
 <template>
     <div>
         <section>
-            <h3>Dane adresowe</h3>
-            <div>Miasto {{address.city}}</div>
-            <div>Państwo {{address.country}}</div>
-            <div>Kod pocztowy {{address.postal_code}}</div>
-            <div>Województwo {{address.state}}</div>
-            <div>Nr domu/lokalu {{address.street_number}}</div>
-            <div>Ulica {{address.street}}</div>
+            <h3>Dane adresowe: </h3>
+            <div>
+                <label class="my-label">Miasto:</label> {{address.city}}
+            </div>
+            <div>
+                <label class="my-label">Państwo:</label> {{address.country}}
+            </div>
+            <div>
+                <label class="my-label">Kod pocztowy:</label> {{address.postal_code | setEmptyChar}}
+            </div>
+            <div>
+                <label class="my-label">Województwo:</label> {{address.state | setEmptyChar}}
+            </div>
+            <div>
+                <label class="my-label">Nr domu / lokalu:</label> {{address.street_number | setEmptyChar}}
+            </div>
+            <div>
+                <label class="my-label">Ulica:</label> {{address.street | setEmptyChar}}
+            </div>
         </section>
 
     </div>
 </template>
 
 <script>
+    import {filters} from "../../mixins/filters";
+
     export default {
+        mixins:[filters],
         props:{
             address: Object,
         }

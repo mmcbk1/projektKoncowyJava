@@ -1,6 +1,6 @@
 <template>
     <article>
-        <div class="form-group col-md-2 col-md-offset-1">
+        <div class="form-group col-md-2">
             <label>Imię</label>
             <input class="form-control" v-model="user.name" type="text"/>
         </div>
@@ -20,8 +20,14 @@
             <label>Nazwa stanowiska</label>
             <input class="form-control" v-model="user.departmentName" type="text"/>
         </div>
+        <div class="form-group col-md-2">
+            <label>Akcja</label>
+            <button type="submit"
+                    @click="search"
+                    class="btn btn-primary form-control">Szukaj</button>
+        </div>
         <section>
-            <table  class="table table-condensed">
+            <table class="table table-condensed">
                 <thead>
                 <th>Imię</th>
                 <th>Nazwisko</th>
@@ -50,34 +56,8 @@
         mixins: [prepareGetParams],
         data() {
             return {
-                results:[
-                    {
-                        name: 'Anna',
-                        lastName:'Kowalski',
-                        email: 'anna.kowalski@intel.com',
-                        companyName:'Intel',
-                        departmentName:'Junior developer'
-                    },  {
-                        name: 'Anna',
-                        lastName:'Kowalski',
-                        email: 'anna.kowalski@intel.com',
-                        companyName:'Intel',
-                        departmentName:'Junior developer'
-                    },  {
-                        name: 'Anna',
-                        lastName:'Kowalski',
-                        email: 'anna.kowalski@intel.com',
-                        companyName:'Intel',
-                        departmentName:'Junior developer'
-                    },  {
-                        name: 'Anna',
-                        lastName:'Kowalski',
-                        email: 'anna.kowalski@intel.com',
-                        companyName:'Intel',
-                        departmentName:'Junior developer'
-                    },
-
-                ],
+                searchUrl: '/search/companies',
+                results: [],
                 user: {
                     name: '',
                     lastName: '',
@@ -90,28 +70,21 @@
         },
         methods: {
             search() {
-                let name = this.prepareUrl('name', this.user);
-                let lastName = this.prepareUrl('lastName', this.user);
-                let email = this.prepareUrl('email', this.user);
-                let companyName = this.prepareUrl('companyName', this.user);
-                let departmentName = this.prepareUrl('departmentName', this.user);
-                let vm = this;
+                let url = this.searchUrl;
+                url += this.addToUrlGet(url, 'name', this.user.name);
+                url += this.addToUrlGet(url, 'lastName', this.user.lastName);
+                url += this.addToUrlGet(url, 'email', this.user.email);
+                url += this.addToUrlGet(url, 'companyName', this.user.companyName);
+                url += this.addToUrlGet(url, 'departmentName', this.user.departmentName);
 
-                return axios.get(
-                    'search/companies'
-                    + name
-                    + lastName
-                    + email
-                    + companyName
-                    +departmentName
-                ).then(function (response) {
+                return axios.get(url)
+                    .then(function (response) {
                             console.log(response.data);
+                            this.results = response.data;
                         },
                         function (error) {
 
-                        }).then(function () {
-                        vm.resetUrl();
-                    })
+                        });
             },
 
         },

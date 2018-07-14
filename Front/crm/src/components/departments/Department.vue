@@ -1,52 +1,67 @@
 <template>
     <div>
         <article>
-            <section>
-                <router-link tag="div" :to="{
+            <section class="btn-wrapper">
+                <router-link tag="button" class="btn btn-success" :to="{
                 name:'user-create',
                 params:{cid:$route.params.cid, did:$route.params.cid}
                 }">
-                    <a>Dodaj usera</a>
+                    Dodaj usera
                 </router-link>
             </section>
-            <section>
-                <router-link tag="div" :to="{
+            <section class="btn-wrapper">
+                <router-link tag="button" class="btn btn-success" :to="{
                 name:'position-create',
                 params:{cid:$route.params.cid}
                 }">
-                    <a>Dodaj Stanowisko</a>
+                    Dodaj Stanowisko
                 </router-link>
             </section>
             <section>
                 <h3>Nazwa firmy: {{department.companyName}}</h3>
-                <div>Nazwa {{department.name}}</div>
-                <div>Krótka nazwa {{department.shortName}}</div>
+                <div>
+                    <label class="my-label">Nazwa:</label> {{department.name}}
+                </div>
+                <div>
+                    <label class="my-label">Krótka nazwa:</label> {{department.shortName}}
+                </div>
             </section>
             <crm-address-display
                     :address="department.address"
-                 ></crm-address-display>
+            ></crm-address-display>
             <section v-if="department.users">
                 <h3>Lista użytkowników</h3>
-                <ul>
-                    <li v-for="user in department.users" :key="user.id">
-                        <router-link :to="{name:'user-single', params:{
-                        cid:$route.params.cid,
-                        did:$route.params.did,
-                        uid:user.id,
-                        }}">
-                            {{user.name}}
-                            {{user.lastName}}
-                        </router-link>
-
-                    </li>
-                </ul>
+                <table class="table table-condensed">
+                    <thead>
+                    <th>Imię</th>
+                    <th>Nazwisko</th>
+                    <th>E-mail</th>
+                    </thead>
+                    <tbody>
+                    <tr v-for="user in department.users" :key="user.id" @click="gotToUser(user.id)">
+                        <td>{{user.name | setEmptyChar}}</td>
+                        <td>{{user.lastName | setEmptyChar}}</td>
+                        <td>{{user.email | setEmptyChar}}</td>
+                    </tr>
+                    </tbody>
+                </table>
             </section>
             <section v-if="department.positions.length">
-                <h3>Stanowiska</h3>
-                <div v-for="(position, i) in department.positions">
-                    <span>{{position.name}}</span>
-                    <span @click="deletePosition(position.id, i)"> usuń</span>
-                </div>
+                <h3>Stanowiska: </h3>
+                <table class="table table-condensed">
+                    <thead>
+                    <th>Nazwa</th>
+                    <th>Akcja</th>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(position, i) in department.positions">
+                        <td>{{position.name | setEmptyChar}}</td>
+                        <td>
+                            <span @click="deletePosition(position.id, i)" class="delete">usuń</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </section>
         </article>
 
@@ -55,9 +70,10 @@
 
 <script>
     import AddressDisplay from '../address/AddressDisplay'
+    import {filters} from "../../mixins/filters";
 
     export default {
-
+        mixins: [filters],
         components: {
             'crm-address-display': AddressDisplay
         },
@@ -68,7 +84,7 @@
                     shortName: '',
                     companyName: '',
                     users: [],
-                    positions:[],
+                    positions: [],
                     address: {},
                 }
             }
@@ -77,25 +93,36 @@
             getDepartment() {
                 let did = this.$route.params.did;
                 let vm = this;
-                return axios.get('department/'+did)
+                return axios.get('department/' + did)
                     .then(function (response) {
-                        console.log(response.data);
+                            console.log(response.data);
                             vm.department = response.data;
                         },
                         function (error) {
 
                         })
             },
-            deletePosition(id, i){
+            gotToUser(userId) {
+                this.$router.push(
+                    {
+                        name: 'user-single', params: {
+                            cid: this.$route.params.cid,
+                            did: this.$route.params.did,
+                            uid: userId,
+                        }
+                    }
+                );
+            },
+            deletePosition(id, i) {
                 let vm = this;
                 console.log(i);
-               return axios.delete('position/'+id)
-                    .then(function(response){
-                           vm.department.position.slice(i,1);
-                    },
-                    function(error){
+                return axios.delete('position/' + id)
+                    .then(function (response) {
+                            vm.department.position.slice(i, 1);
+                        },
+                        function (error) {
 
-                    })
+                        })
             }
         },
         created() {
@@ -105,5 +132,17 @@
 </script>
 
 <style scoped>
+    .btn-wrapper {
+        display: inline-block;
+        margin-right: 10px;
+    }
+    .delete{
+        padding: 7px;
+    }
+    .delete:hover{
+        cursor: pointer;
+        color: #fff;
 
+        background-color: indianred;
+    }
 </style>

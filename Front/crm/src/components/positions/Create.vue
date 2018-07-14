@@ -1,11 +1,16 @@
 <template>
-    <article>
-       <div>
+    <article class="col-md-3">
+       <div class="form-group">
            <label for="name">Nazwa pozycji</label>
-           <input type="text" v-model="position.name" id="name"/>
+           <input class="form-control" type="text"
+                  v-model="position.name"
+                  placeholder="np. Java developer"
+                  id="name"/>
        </div>
         <div>
-            <button type="submit" @click="storePosition()">Zapisz</button>
+            <button type="submit"
+                    class="btn btn-success"
+                    @click="storePosition()">Zapisz</button>
         </div>
     </article>
 </template>

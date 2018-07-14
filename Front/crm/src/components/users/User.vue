@@ -1,16 +1,25 @@
 <template>
     <div>
-        <article>
+        <article class="col-md-3">
             <section>
+                <h3>Dane użytkownika:</h3>
                 <!--<h3>Nazwa firmy: {{user.department.companyName}}</h3>
                 <h2>Nazwa stanowiska: {{user.department.position.name}}</h2>-->
-                <div>Imię: {{user.name}}</div>
-                <div>Nazwisko: {{user.lastName}}</div>
-                <div>E-mail: {{user.email}}</div>
+                <div>
+                    <label class="my-label">Imię:</label> {{user.name}}
+                </div>
+                <div>
+                    <label class="my-label">Nazwisko:</label> {{user.lastName | setEmptyChar}}
+                </div>
+                <div>
+                    <label class="my-label">E-mail:</label> {{user.email | setEmptyChar}}
+                </div>
             </section>
-            <crm-address-display
-                    :address="user.address"
-            ></crm-address-display>
+            <section class="form-group">
+                <crm-address-display
+                        :address="user.address"
+                ></crm-address-display>
+            </section>
             <section>
                 <div class="form-group">
                     <textarea v-model="message.content" class="form-control" placeholder="napisz do mnie.."></textarea>
@@ -18,7 +27,6 @@
                 <div class="form-group">
                     <button class="btn btn-success">Wyślij</button>
                 </div>
-
             </section>
         </article>
 
@@ -27,9 +35,10 @@
 
 <script>
     import AddressDisplay from '../address/AddressDisplay'
+    import {filters} from "../../mixins/filters";
 
     export default {
-
+        mixins: [filters],
         components: {
             'crm-address-display': AddressDisplay
         },
@@ -39,12 +48,12 @@
                     name: '',
                     lastName: '',
                     email: '',
-                    department:{},
+                    department: {},
                     company: {},
                     address: {},
                 },
-                message:{
-                    content:''
+                message: {
+                    content: ''
                 }
             }
         },
@@ -52,7 +61,7 @@
             getUser() {
                 let uid = this.$route.params.uid;
                 let vm = this;
-                return axios.get('user/'+uid)
+                return axios.get('user/' + uid)
                     .then(function (response) {
                             console.log(response.data);
                             vm.user = response.data;
@@ -69,5 +78,7 @@
 </script>
 
 <style scoped>
-
+    textarea {
+        resize: none;
+    }
 </style>
