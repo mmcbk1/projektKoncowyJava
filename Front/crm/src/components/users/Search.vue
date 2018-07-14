@@ -28,7 +28,7 @@
             <label>Nazwa stanowiska</label>
             <input class="form-control"
                    placeholder="Software Developer"
-                   v-model="user.departmentName" type="text"/>
+                   v-model="user.positionName" type="text"/>
         </div>
         <div class="form-group col-md-2">
             <label>Akcja</label>
