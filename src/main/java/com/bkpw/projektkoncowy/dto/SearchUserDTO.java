@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SearchUserDTO extends BaseEntityDTO{
+public class SearchUserDTO{
+
+    private Long id;
 
     private String name;
 
@@ -21,14 +23,16 @@ public class SearchUserDTO extends BaseEntityDTO{
 
     private String positionName;
 
-    public SearchUserDTO(Long id, String name, String lastName, String email, String companyName, Long companyId, String positionName) {
-   super(id);
+    private Long departmentId;
+
+/*    public SearchUserDTO(Long id, String name, String lastName, String email, String companyName, Long companyId, String positionName, Long departmentId) {
+        this.id=id;
         this.name = name;
         this.lastName = lastName;
         this.email = email;
         this.companyName = companyName;
-        this.companyId=companyId;
-        this.positionName=positionName;
-
-    }
+        this.companyId = companyId;
+        this.positionName = positionName;
+        this.departmentId = departmentId;
+    }*/
 }

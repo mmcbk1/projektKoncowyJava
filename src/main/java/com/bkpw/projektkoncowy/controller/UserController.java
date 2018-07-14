@@ -75,7 +75,8 @@ public class UserController {
                         user.getEmail(),
                         user.getPosition().getDepartment().getCompany().getName(),
                         user.getPosition().getDepartment().getCompany().getId(),
-                        user.getPosition().getName()
+                        user.getPosition().getName(),
+                        user.getPosition().getDepartment().getId()
                 ))
                 .collect(Collectors.toList()), pageable, totalElements);
     }
