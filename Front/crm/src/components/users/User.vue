@@ -42,6 +42,7 @@
         components: {
             'crm-address-display': AddressDisplay
         },
+
         data() {
             return {
                 user: {

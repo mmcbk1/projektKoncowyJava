@@ -1,3 +1,4 @@
+import Login from './components/login/Login';
 import MainNav from './components/MainNav';
 import Companies from './components/companies/Companies';
 import Company from './components/companies/Company';
@@ -13,6 +14,7 @@ import MessagesList from './components/messages/List';
 import Chat from './components/messages/Chat';
 
 export const routes = [
+    {path:'' , component:Login, name:'login'},
     {path: '/companies', component:MainNav, children:[
             {path: '', name:'companies', component: Companies},
             {path: 'users', name:'users-search', component:UsersSearch},
@@ -30,4 +32,5 @@ export const routes = [
             {path: '', name:'messages', component: MessagesList},
             {path: ':recipientId', name:'chat', component:Chat},
         ]},
+    {path:'*', component:Login}
 ];

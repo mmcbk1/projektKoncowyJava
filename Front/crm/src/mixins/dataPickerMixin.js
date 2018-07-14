@@ -12,7 +12,8 @@ export const dataPickerMixin = {
     },
     methods: {
         customFormatter(date) {
-            return moment(date).format('MM-DD-YYYY');
+            let dataObj = new Date(date);
+            return moment(dataObj).format('YYYY-MM-DD');
         }
     }
 };

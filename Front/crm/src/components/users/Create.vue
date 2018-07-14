@@ -89,6 +89,16 @@
     import Address from '../address/Address'
     export default {
         mixins:[dataPickerMixin],
+        watch:{
+            'user.hireDate'(newValue, oldValue){
+                newValue = this.customFormatter(newValue);
+                this.user.hireDate = newValue;
+            },
+            'user.birthDate'(newValue, oldValue){
+                newValue = this.customFormatter(newValue);
+                this.user.birthDate = newValue;
+            }
+        },
         data(){
             return {
                 user:{
