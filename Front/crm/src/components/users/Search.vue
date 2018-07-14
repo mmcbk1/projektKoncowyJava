@@ -36,7 +36,7 @@
                     @click="search"
                     class="btn btn-primary form-control">Szukaj</button>
         </div>
-        <section class="col-md-8 col-lg-offset-2" v-if="results.length">
+        <section class="col-md-10 col-lg-offset-1" v-if="results.length">
             <table class="table table-condensed">
                 <thead>
                 <th>Imię</th>
