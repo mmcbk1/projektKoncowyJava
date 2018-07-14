@@ -15,9 +15,9 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DepartmentDTO extends BaseEntityDTO {
+public class DepartmentDTO {
 
-
+    private Long id;
 
     private String name;
 
@@ -34,7 +34,7 @@ public class DepartmentDTO extends BaseEntityDTO {
     private List<Position> positions;
 
     public DepartmentDTO(Long id, String name, String shortName, Long company_id, String companyName) {
-        super(id);
+        this.id=id;
         this.name = name;
         this.shortName = shortName;
         this.company_id = company_id;

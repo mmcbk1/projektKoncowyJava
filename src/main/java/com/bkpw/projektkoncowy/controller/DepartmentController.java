@@ -4,6 +4,7 @@ import com.bkpw.projektkoncowy.dto.DepartmentDTO;
 import com.bkpw.projektkoncowy.dto.SimpleUserDTO;
 import com.bkpw.projektkoncowy.entity.Department;
 import com.bkpw.projektkoncowy.entity.User;
+import com.bkpw.projektkoncowy.repository.DepartmentRepository;
 import com.bkpw.projektkoncowy.repository.PositionRepository;
 import com.bkpw.projektkoncowy.repository.UserRepository;
 import com.bkpw.projektkoncowy.service.CompanyService;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.reducing;
 import static java.util.stream.Collectors.toList;
 
 @RestController
@@ -68,14 +70,14 @@ public class DepartmentController {
     public PageImpl search(
             @RequestParam(value = "name", required = false, defaultValue = "") String name,
             @RequestParam(value = "shortName", required = false, defaultValue = "") String shortName,
-            @RequestParam(value = "departmentName", required = false, defaultValue = "") String companyName,
+            @RequestParam(value = "companyName", required = false, defaultValue = "") String companyName,
             Pageable pageable) {
 
         Page<Department> result = departmentService.search(name, shortName, companyName, pageable);
 
         int totalElements = (int) result.getTotalElements();
 
-        return new PageImpl<>(result
+       return new PageImpl<>(result
                 .stream()
                 .map(department -> new DepartmentDTO(
                         department.getId(),
@@ -85,6 +87,7 @@ public class DepartmentController {
                         department.getCompany().getName()
                 ))
                 .collect(Collectors.toList()), pageable, totalElements);
+
     }
 
     @GetMapping("department/{id}")

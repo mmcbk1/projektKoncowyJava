@@ -13,7 +13,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Boolean existsByEmail(String email);
 
-    Page<User> findByNameIgnoreCaseAndLastNameIgnoreCaseAndEmailIgnoreCaseAndPosition_Department_Company_NameAndPosition_NameIgnoreCase(
+    Page<User> findByNameContainingIgnoreCaseAndLastNameContainingIgnoreCaseAndEmailContainingIgnoreCaseAndPosition_Department_Company_NameAndPosition_NameContainingIgnoreCase(
             String name,
             String lastName,
             String email,
