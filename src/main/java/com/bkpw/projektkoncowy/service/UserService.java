@@ -58,7 +58,7 @@ public class UserService implements GenericService<User> {
                              String companyName,
                              String positionName,
                              Pageable pageable) {
-        return userRepository.findByNameContainingIgnoreCaseAndLastNameContainingIgnoreCaseAndEmailContainingIgnoreCaseAndPosition_Department_Company_NameAndPosition_NameContainingIgnoreCase(name, lastName, email, companyName, positionName,pageable);
+        return userRepository.findByNameContainingIgnoreCaseAndLastNameContainingIgnoreCaseAndEmailContainingIgnoreCaseAndPosition_Department_Company_NameContainingIgnoreCaseAndPosition_NameContainingIgnoreCase(name, lastName, email, companyName, positionName,pageable);
     }
 
 

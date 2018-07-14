@@ -4,6 +4,7 @@ import com.bkpw.projektkoncowy.dto.*;
 import com.bkpw.projektkoncowy.entity.User;
 import com.bkpw.projektkoncowy.exception.PasswordException;
 import com.bkpw.projektkoncowy.repository.PositionRepository;
+import com.bkpw.projektkoncowy.repository.UserRepository;
 import com.bkpw.projektkoncowy.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ public class UserController {
 
     @Autowired
     ModelMapper modelMapper;
+
+    @Autowired
+    UserRepository userRepository;
 
     @PostMapping("/user")
     @ResponseStatus(HttpStatus.CREATED)
@@ -62,7 +66,7 @@ public class UserController {
         Page<User> result=userService.search(name,lastName,email,companyName,positionName,pageable);
         int totalElements = (int) result.getTotalElements();
 
-        return new PageImpl<SearchUserDTO>(result
+        return new PageImpl<>(result
                 .stream()
                 .map(user -> new SearchUserDTO(
                         user.getId(),
