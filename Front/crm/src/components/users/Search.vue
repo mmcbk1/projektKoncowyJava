@@ -2,23 +2,33 @@
     <article>
         <div class="form-group col-md-2">
             <label>Imię</label>
-            <input class="form-control" v-model="user.name" type="text"/>
+            <input class="form-control"
+                   placeholder="Natalia"
+                   v-model="user.name" type="text"/>
         </div>
         <div class="form-group col-md-2">
             <label>Nazwisko</label>
-            <input class="form-control" v-model="user.lastName" type="text"/>
+            <input class="form-control"
+                   placeholder="Kowalska"
+                   v-model="user.lastName" type="text"/>
         </div>
         <div class="form-group col-md-2">
             <label>E-mail</label>
-            <input class="form-control" v-model="user.email" type="text"/>
+            <input class="form-control"
+                   placeholder="nat.kow@web.it"
+                   v-model="user.email" type="text"/>
         </div>
         <div class="form-group col-md-2">
             <label>Nazwa firmy</label>
-            <input class="form-control" v-model="user.companyName" type="text"/>
+            <input class="form-control"
+                   placeholder="np. Intel"
+                   v-model="user.companyName" type="text"/>
         </div>
         <div class="form-group col-md-2">
             <label>Nazwa stanowiska</label>
-            <input class="form-control" v-model="user.departmentName" type="text"/>
+            <input class="form-control"
+                   placeholder="Software Developer"
+                   v-model="user.departmentName" type="text"/>
         </div>
         <div class="form-group col-md-2">
             <label>Akcja</label>
@@ -26,7 +36,7 @@
                     @click="search"
                     class="btn btn-primary form-control">Szukaj</button>
         </div>
-        <section>
+        <section class="col-md-8 col-lg-offset-2" v-if="results.length">
             <table class="table table-condensed">
                 <thead>
                 <th>Imię</th>
@@ -41,7 +51,7 @@
                     <td>{{user.lastName}}</td>
                     <td>{{user.email}}</td>
                     <td>{{user.companyName}}</td>
-                    <td>{{user.departmentName}}</td>
+                    <td>{{user.positionName}}</td>
                 </tr>
                 </tbody>
             </table>
@@ -63,7 +73,7 @@
                     lastName: '',
                     email: '',
                     companyName: '',
-                    departmentName: '',
+                    positionName: '',
                 },
 
             }
@@ -75,7 +85,7 @@
                 url += this.addToUrlGet(url, 'lastName', this.user.lastName);
                 url += this.addToUrlGet(url, 'email', this.user.email);
                 url += this.addToUrlGet(url, 'companyName', this.user.companyName);
-                url += this.addToUrlGet(url, 'departmentName', this.user.departmentName);
+                url += this.addToUrlGet(url, 'positionName', this.user.positionName);
                 let vm = this;
                 return axios.get(url)
                     .then(function (response) {
@@ -88,5 +98,15 @@
             },
 
         },
+        goToUser(cid, did, iid){
+            this.$router.push({
+                name:'user-single',
+                params:{
+                    cid:cid,
+                    did:did,
+                    uid:uid
+                }
+            })
+        }
     }
 </script>

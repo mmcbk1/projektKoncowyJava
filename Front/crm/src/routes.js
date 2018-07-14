@@ -15,14 +15,14 @@ import Chat from './components/messages/Chat';
 export const routes = [
     {path: '/companies', component:MainNav, children:[
             {path: '', name:'companies', component: Companies},
+            {path: 'users', name:'users-search', component:UsersSearch},
+            {path: 'departments', name:'departments-search', component: DepartmentSearch},
             {path: ':cid', name:'company-single', component: Company},
             {path: ':cid/department/:did/position/create', name:'position-create', component:PositionCreate },
             {path: ':cid/department/create', name:'department-create', component:DepartmentCreate},
             {path: ':cid/department/:did', name:'department-single', component:Department},
             {path: ':cid/department/:did/user/create', name:'user-create', component:UserCreate},
             {path: ':cid/department/:did/user/:uid', name:'user-single', component:User},
-            {path: 'users', name:'users-search', component:UsersSearch},
-            {path: 'departments', name:'departments-search', component: DepartmentSearch},
 
             {path: 'create', name:'company-create', component:CompanyCreate},
         ]},
