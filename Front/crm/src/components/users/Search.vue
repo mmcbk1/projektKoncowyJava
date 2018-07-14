@@ -36,7 +36,7 @@
                     @click="search"
                     class="btn btn-primary form-control">Szukaj</button>
         </div>
-        <section class="col-md-10 col-lg-offset-1" v-if="results.length">
+        <section  v-if="results.length">
             <table class="table table-condensed">
                 <thead>
                 <th>Imię</th>
@@ -46,7 +46,7 @@
                 <th>Nazwa stanowiska</th>
                 </thead>
                 <tbody>
-                <tr v-for="user in results">
+                <tr @click="goToUser(user.companyId, user.departmentId, user.id)" v-for="user in results">
                     <td>{{user.name}}</td>
                     <td>{{user.lastName}}</td>
                     <td>{{user.email}}</td>
@@ -89,24 +89,27 @@
                 let vm = this;
                 return axios.get(url)
                     .then(function (response) {
-                            console.log(response.data);
                             vm.results = response.data.content;
                         },
                         function (error) {
 
                         });
             },
+            goToUser(cid, did, uid){
+                this.$router.push({
+                    name:'user-single',
+                    params:{
+                        cid:cid,
+                        did:did,
+                        uid:uid
+                    }
+                })
+            },
 
         },
-        goToUser(cid, did, iid){
-            this.$router.push({
-                name:'user-single',
-                params:{
-                    cid:cid,
-                    did:did,
-                    uid:uid
-                }
-            })
+
+        mounted(){
+            this.search();
         }
     }
 </script>
